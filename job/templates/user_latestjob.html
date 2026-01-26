@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'user_navigation.html' %}
+
+    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        Latest Job List
+    </marquee>
+    <hr>
+
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr style="background-color:#deb887; text-align:center;">
+                <th>S.No</th>
+                <th>Company Name</th>
+                <th>Job Title</th>
+                <th>Location</th>
+                <th>Start Date</th>
+                 <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody >
+        {% for i in job %}
+            <tr style="background-color:#b3d9ff; text-align:center;">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.recruiter.company }}</td>
+                 <td>{{ i.title }}</td>
+                <td>{{ i.location }}</td>
+                 <td>{{ i.start_date }}</td>
+                <td>{{ i.end_date }}</td>
+                {% if i.id in li %}
+                <td>Applied</td>
+                {% else %}
+                <td><a href="{% url 'job_detail' i.id %}" class="btn btn-success btn-sm">Apply</a></td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+     {%block content %}
+
+    {% if error == "no" %}
+<script>
+    alert("Login successful");
+    window.location.href = "{% url 'user_home' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid login credentials , try again...");
+</script>
+{% endif %}
+     {% endblock %}
+
+</body>
+</html>
+
+
+<style>
+:root {
+    --sky-blue: #2c7be5;
+    --sky-blue-dark: #1b5fc1;
+}
+
+/* Table */
+table {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Table Head */
+thead tr {
+    background-color: var(--sky-blue);
+    color: white;
+    text-align: center;
+}
+
+/* Table Body */
+tbody tr {
+    background-color: #f2f8ff;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #e0eeff;
+    transform: scale(1.01);
+}
+
+/* Apply Button */
+.btn-success {
+    background-color: var(--sky-blue);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: var(--sky-blue-dark);
+    transform: translateY(-2px);
+}
+
+/* HR */
+hr {
+    border-top: 2px solid var(--sky-blue);
+}
+</style>

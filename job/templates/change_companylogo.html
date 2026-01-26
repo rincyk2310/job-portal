@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'recruiter_navigation.html' %}
+
+
+<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
+background-color:black; font-weight:bold; margin-top:1%">
+  Change Company Logo
+</marquee>
+
+<hr>
+
+<form class="container mt-5"
+      method="post"
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label><b>Job Title</b></label>
+            <input type="text" class="form-control" readonly name="title" value="{{job.title}}" required>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-12">
+            <img src="{{ job.image.url}}" style="width:80px;height:80px;border-radius:50%">
+        </div>
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-12">
+            <label><b>Company Logo</b></label>
+            <input type="file" class="form-control" name="image" required>
+        </div>
+    </div>
+
+
+
+    <input type="submit"
+           value="Submit"
+           class="btn btn-primary"
+           style="height:40px; font-size:20px; width:200px;">
+</form>
+
+<br><br>
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Company Logo has been updated");
+    window.location = ('{% url 'change_companylogo' job.id %}')
+
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, try again...");
+</script>
+{% endif %}
+
+
+
+</body>
+</html>
+
+
+
+
+
+     {%block content %}
+
+
+     {% endblock %}
+
+</body>
+</html>

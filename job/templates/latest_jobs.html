@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'navigation.html' %}
+
+    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        Latest Job Openings
+    </marquee>
+    <hr>
+
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr style="background-color:#deb887; text-align:center;">
+                <th>S.No</th>
+                <th>Company Name</th>
+                <th>Job Title</th>
+                <th>Location</th>
+                <th>Start Date</th>
+                 <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody >
+        {% for i in job %}
+            <tr style="background-color:#b3d9ff;    text-align:center;">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.recruiter.company }}</td>
+                 <td>{{ i.title }}</td>
+                <td>{{ i.location }}</td>
+                 <td>{{ i.start_date }}</td>
+                <td>{{ i.end_date }}</td>
+
+                <td><a href="{% url 'user_login' %}" class="btn btn-success btn-sm">Login To Apply</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+     {%block content %}
+
+    {% if error == "no" %}
+<script>
+    alert("Login successful");
+    window.location.href = "{% url 'user_home' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid login credentials , try again...");
+</script>
+{% endif %}
+     {% endblock %}
+
+</body>
+</html>
+
+
+<style>
+    .job-header h2 {
+        font-weight: 700;
+    }
+
+    .job-header p {
+        font-size: 15px;
+    }
+
+    table {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    thead tr {
+        text-align: center;
+    }
+
+    tbody tr {
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+        transform: scale(1.01);
+    }
+
+    .btn-apply {
+       border-radius: 20px;
+        padding: 5px 15px;
+        font-size: 14px;
+    }
+
+    .btn-apply:hover {
+        color: white;
+    }
+</style>
+
+

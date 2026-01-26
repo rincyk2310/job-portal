@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6eaacaa-75be-4439-821b-7915d2790d8e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jobportal.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/0002_recruiter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/0003_job.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/0004_apply.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/0005_remove_apply_job_alter_apply_apply_date_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/a1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/a2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/about.us.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/book.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/books.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/f7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/html.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/job1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/job2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/job3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/job4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/jobe1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/jobe2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/openbook.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/port3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/portal1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/portal2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/portal3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/portal4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/portal5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/pswd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/python.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/student1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/student2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/student3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/static/images/webdesign.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/add_job.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/admin_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/admin_login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/admin_navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/applied_candidates.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/applyjob.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/change_companylogo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/change_pwdadmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/change_pwdrecruiter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/change_pwduser.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/change_status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/contact.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/edit_job.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/job_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/job_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/latest_jobs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_accepted.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_all.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_pending.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_rejected.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/recruiter_signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/user_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/user_latestjob.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/user_login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/user_navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/user_signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/templates/view_users.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobportal/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobportal/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobportal/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobportal/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobportal/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/305220a1685dd84587ed52ac0de3651f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/IMG_20250419_181505.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Screenshot_20250630_184255.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Screenshot_20250630_184402.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Screenshot_20250824_132125.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Screenshot_20250824_132125_Vtvis8U.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/bubble-removebg-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c1_RGTO8p9.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c2_ceaJrUK.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/c3_OM93uFA.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/egypt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/form1-.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/hawai.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/hawai_NLkV2l4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/i4-.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/ii4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/logo.avif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/logo_QIUAO6p.avif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/mumbai.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/paris.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/paris_JZ1B3bK.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/sydney.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/sydney_AxC7SGL.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/sydney_HRT4BOe.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/tokyo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/tokyo_3Q5HIqJ.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/tour.video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="38c67LQ7ifEgcURoRjzTXz66ZLC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/rincy/OneDrive/Desktop/django_project/jobportal"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6eaacaa-75be-4439-821b-7915d2790d8e" name="Changes" comment="" />
+      <created>1769086343591</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769086343591</updated>
+    </task>
+    <servers />
+  </component>
+</project>

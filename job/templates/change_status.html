@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'admin_navigation.html' %}
+
+    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        View Recruiters - Pending
+    </marquee>
+    <hr>
+
+
+    <form class="container mt-5" method="post">
+        {% csrf_token %}
+        <label><b>RecruiterName</b></label>
+        <input type="text" class="form-control" name="uname" value="{{recruiter.user.first_name}}">
+        <label><b>Status</b></label>
+        <select  class="form-control" name="status">
+            <option value="Accept">Accept</option>
+             <option value="Reject">Reject</option>
+        </select>
+
+
+        <input type="submit" class="btn btn-primary" style="margin-top:2%;  height:40px; font-size:20px; width:200px;" >
+    </form>
+
+
+
+     {%block content %}
+
+    {% if error == "no" %}
+<script>
+    alert("Status Changed successfully");
+    window.location.href = "{% url 'recruiter_all' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("something went wrong , try again...");
+</script>
+{% endif %}
+
+     {% endblock %}
+
+</body>
+</html>

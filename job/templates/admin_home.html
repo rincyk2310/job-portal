@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'admin_navigation.html' %}
+
+<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
+background-color:black; font-weight:bold; margin-top:1%">
+    Contact Us
+</marquee>
+
+<hr>
+
+<div class="container mt-5 shadow-lg " >
+    <div class="row" >
+        <div class="col-sm-6 contact-box" >
+            <h4 class="text-center" style="color:blue;"><i class=" fa fa-user py-2 mr-2"></i>Total Recruiters</h4>
+            <p class="text-center font-weight-bold">{{rcount}}</p>
+        </div>
+
+        <div class="col-sm-6 contact-box" >
+            <h4 class="text-center" style="color:blue;"><i class=" fa fa-user py-2 mr-2"></i>Total Users</h4>
+            <p class="text-center font-weight-bold">{{scount}}</p>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+     {%block content %}
+
+    {% if error == "no" %}
+<script>
+    alert("Login successful");
+    window.location.href = "{% url 'user_home' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid login credentials , try again...");
+</script>
+{% endif %}
+     {% endblock %}
+
+</body>
+</html>
+
+<style>
+    .contact-box {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+</style>

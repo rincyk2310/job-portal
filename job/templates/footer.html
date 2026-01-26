@@ -1,0 +1,203 @@
+
+{% load static %}
+<div class="footer mt-3">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Info -->
+            <div class="col-md-4">
+                <h3 class="text-white">Contact Information</h3>
+
+                <p class="contact-item">
+                    <i class="fa fa-map-marker text-danger"></i> Kakkanad, Kochi, Kerala
+                </p>
+
+                <p class="contact-item">
+                    <i class="fa fa-envelope text-danger"></i> abc23@gmail.com
+                </p>
+
+                <p class="contact-item">
+                    <i class="fa fa-mobile text-danger"></i>
+                    +91 9087654321 / +90 8590686788
+                </p>
+
+                <p class="contact-item">
+                    <i class="fa fa-globe text-danger"></i>
+                    www.jobportalsoftwares.com
+                </p>
+            </div>
+
+            <!-- About -->
+            <div class="col-md-4">
+                <h3 class="text-white">Online Placements</h3>
+                <p>
+                    An employment website is a platform that connects employers and job seekers.
+                    Employers can post job openings, and candidates can apply easily through
+                    a centralized job portal system.
+                </p>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-md-4">
+                <h3 class="text-white">Newsletter</h3>
+                <p>Want updates on new jobs? Drop your email below.</p>
+
+                <form class="form-inline" method="post">
+                    {% csrf_token %}
+                    <input type="email"
+                           name="emailid"
+                           placeholder="Enter Email ID"
+                           required
+                           class="form-control newsletter-input mr-2">
+
+                    <input type="submit"
+                           value="Send"
+                           class="btn btn-danger newsletter-btn">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Job Portal | All Rights Reserved
+    </div>
+</div>
+<style>
+.footer {
+    background: linear-gradient(135deg, #0b1d33, #102b4e);
+    padding: 50px 0;
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.footer h3 {
+    font-weight: 600;
+    margin-bottom: 22px;
+    color: #ffffff;
+    position: relative;
+}
+
+.footer h3::after {
+    content: '';
+    width: 55px;
+    height: 3px;
+    background: #2c7be5;
+    display: block;
+    margin-top: 8px;
+}
+
+.footer p {
+    color: #cfd8e3;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.footer i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #2c7be5;
+}
+
+/* Contact hover animation */
+.footer .contact-item {
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.footer .contact-item:hover {
+    transform: translateX(8px);
+    color: #ffffff;
+}
+
+/* Newsletter */
+.newsletter-input {
+    border-radius: 30px;
+    padding: 10px 18px;
+    border: none;
+    width: 65%;
+}
+
+.newsletter-input:focus {
+    box-shadow: 0 0 8px rgba(44, 123, 229, 0.6);
+}
+
+.newsletter-btn {
+    border-radius: 30px;
+    padding: 10px 26px;
+    background: #2c7be5;
+    border: none;
+}
+
+.newsletter-btn:hover {
+    background: #1b5fc1;
+}
+
+/* Footer bottom */
+.footer-bottom {
+    background: #081524;
+    color: #9fb4d0;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 14px;
+    margin-top: 35px;
+}
+
+</style>
+<!--    .footer {-->
+<!--        background: #000;-->
+<!--        padding: 40px 0;-->
+<!--    }-->
+
+<!--    .footer h3 {-->
+<!--        font-weight: 600;-->
+<!--        margin-bottom: 20px;-->
+<!--        position: relative;-->
+<!--    }-->
+
+<!--    .footer h3::after {-->
+<!--        content: '';-->
+<!--        width: 50px;-->
+<!--        height: 3px;-->
+<!--        background: #dc3545;-->
+<!--        display: block;-->
+<!--        margin-top: 6px;-->
+<!--    }-->
+
+<!--    .footer p {-->
+<!--        color: #f1c40f;-->
+<!--        font-size: 15px;-->
+<!--        line-height: 1.6;-->
+<!--    }-->
+
+<!--    .footer i {-->
+<!--        margin-right: 10px;-->
+<!--        font-size: 18px;-->
+<!--    }-->
+
+<!--    .footer .contact-item {-->
+<!--        transition: transform 0.3s ease;-->
+<!--    }-->
+
+<!--    .footer .contact-item:hover {-->
+<!--        transform: translateX(6px);-->
+<!--    }-->
+
+<!--    .newsletter-input {-->
+<!--        border-radius: 30px;-->
+<!--        padding: 10px 15px;-->
+<!--    }-->
+
+<!--    .newsletter-btn {-->
+<!--        border-radius: 30px;-->
+<!--        padding: 10px 25px;-->
+<!--    }-->
+
+<!--    .footer-bottom {-->
+<!--        background: #111;-->
+<!--        color: #aaa;-->
+<!--        text-align: center;-->
+<!--        padding: 10px 0;-->
+<!--        font-size: 14px;-->
+<!--        margin-top: 30px;-->
+<!--    }-->
+

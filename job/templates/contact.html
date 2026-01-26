@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+{% include 'navigation.html' %}
+
+<!-- ✅ PASSWORD CHECK SCRIPT -->
+
+
+<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
+background-color:black; font-weight:bold; margin-top:1%">
+    Contact Us
+</marquee>
+
+<hr>
+
+<div class="container mt-5 shadow-lg " >
+    <div class="row" >
+        <div class="col-sm-3 contact-box" >
+            <h4 class="text-center">Contact</h4>
+            <p class="text-center"><i class=" fa fa-phone-square py-2 mr-2"></i>+91 9087654321</p>
+        </div>
+
+        <div class="col-sm-3 contact-box" >
+            <h4 class="text-center">Email ID</h4>
+            <p class="text-center"><i class=" fa fa-envelope py-2 mr-2"></i>jobportal@gmail.com</p>
+        </div>
+
+        <div class="col-sm-3 contact-box" >
+            <h4 class="text-center">Address</h4>
+            <p class="text-center"><i class=" fa fa-address-card py-2 mr-2"></i>cochin,kerala</p>
+        </div>
+
+        <div class="col-sm-3 contact-box" >
+            <h4 class="text-center">Office Timing</h4>
+            <p class="text-center"> <i class="fa fa-clock-o py-2 "></i> 10:00 AM to 7:00 PM</p>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+<style>
+    .contact-box {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+</style>
+

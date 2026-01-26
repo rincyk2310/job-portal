@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'admin_navigation.html' %}
+
+    <script>
+        function checkpass()
+        {
+        if(document.changepassword.newpassword.value!=document.changepassword.confirmpassword.value)
+        {
+        alert('New password and confirm password does not match');
+        document.changepassword.confirmpassword.focus();
+        return false;
+        }
+        return true;
+        }
+    </script>
+
+
+
+    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        Change Password
+    </marquee>
+    <hr>
+
+
+    <form class="container mt-5" method="post" name="changepassword" onsubmit="return checkpass()">
+        {% csrf_token %}
+        <label><b>Current Password</b></label>
+        <input type="password" class="form-control" name="currentpassword" required="true">
+         <label><b>New Password</b></label>
+        <input type="password" class="form-control" name="newpassword" required="true">
+         <label><b>Confirm New Password</b></label>
+        <input type="password" class="form-control" name="confirmpassword" required="true">
+
+
+
+        <input type="submit" class="btn btn-primary" style="margin-top:2%;  height:40px; font-size:20px; width:200px;" >
+    </form>
+
+
+
+     {%block content %}
+
+    {% if error == "no" %}
+<script>
+    alert("Password Changed successfully");
+    window.location.href = "{% url 'Logout' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid password , try again...");
+</script>
+{% endif %}
+
+{% if error == "not" %}
+<script>
+    alert("Your current password is wrong , try again...");
+</script>
+{% endif %}
+
+     {% endblock %}
+
+</body>
+</html>
