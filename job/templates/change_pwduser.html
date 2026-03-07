@@ -6,6 +6,54 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+<style>
+    .popup-box{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:400px;
+    padding:25px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+
+    text-align:center;
+
+    font-size:18px;
+
+    z-index:99999;
+
+    animation: fadePopup 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+.warning{
+    border-left:6px solid #ffc107;
+}
+
+@keyframes fadePopup{
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+}
+</style>
 <body>
 
     {% include 'user_navigation.html' %}
@@ -50,22 +98,29 @@
      {%block content %}
 
     {% if error == "no" %}
+<div class="popup-box success">
+✅ Password Changed successfully
+</div>
+
 <script>
-    alert("Password Changed successfully");
-    window.location.href = "{% url 'Logout' %}";
+setTimeout(function(){
+    window.location.href="{% url 'Logout' %}";
+},2000);
 </script>
 {% endif %}
+
 
 {% if error == "yes" %}
-<script>
-    alert("Invalid password , try again...");
-</script>
+<div class="popup-box error">
+❌ Invalid password, try again...
+</div>
 {% endif %}
 
+
 {% if error == "not" %}
-<script>
-    alert("Your current password is wrong , try again...");
-</script>
+<div class="popup-box warning">
+⚠ Your current password is wrong, try again...
+</div>
 {% endif %}
 
      {% endblock %}

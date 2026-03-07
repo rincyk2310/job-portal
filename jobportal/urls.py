@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-                  path('admin/admin_loginpage/', admin.site.login, name='admin_loginpage'),
+    path('admin/admin_loginpage/', admin.site.login, name='admin_loginpage'),
     path('', index,name='index'),
     path('admin_login', admin_login, name='admin_login'),
     path('user_login', user_login, name='user_login'),
@@ -53,5 +53,13 @@ urlpatterns = [
     path('job_detail/<int:pid>', job_detail, name='job_detail'),
     path('applyjob/<int:pid>', applyjob, name='applyjob'),
     path('applied_candidates', applied_candidates, name='applied_candidates'),
+    path('update-status/<int:pid>/<str:status>/', update_status, name='update_status'),
     path('contact', contact, name='contact'),
+    path('search_jobs/', search_jobs, name='search_jobs'),
+    path('about/', about, name='about'),
+    path('services/', services, name='services'),
+    path('save-job/<int:pid>/', save_job, name='save_job'),
+    path('saved-jobs/', saved_jobs, name='saved_jobs'),
+    path('remove_savedjob/<int:id>/', remove_savedjob, name='remove_savedjob'),
+    path('mailsent/', mail_sent),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

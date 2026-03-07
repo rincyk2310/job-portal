@@ -6,6 +6,113 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+<style>
+   .custom-alert{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    min-width: 320px;
+    max-width: 420px;
+
+    padding: 20px 30px;
+    border-radius: 12px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    box-shadow:0 10px 40px rgba(0,0,0,0.25);
+
+    z-index: 9999;
+
+    text-align:center;
+
+    animation: fadeSlide 0.8s ease;
+}
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity:1;
+        transform: translateX(0);
+    }
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+.warning{
+    border-left:6px solid #ffc107;
+}
+
+
+.navbar{
+    background:#000000 !important;
+}
+
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
+}
+
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
+}
+
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
+}
+
+
+
+    .page-hero{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.page-hero-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+}
+
+.page-hero-overlay h1{
+    color: white;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.page-hero-overlay p{
+    color: white;
+}
+
+.page-hero-overlay a{
+    color: #7ac142;
+    text-decoration: none;
+}
+</style>
 <body>
 
     {% include 'navigation.html' %}
@@ -14,8 +121,20 @@
     <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
         Recruiter Login
     </marquee>
-    <hr>
 
+<div class="page-hero">
+    <img src="{% static 'images/hero_1.jpg' %}" class="page-hero-img">
+
+    <div class="page-hero-overlay">
+        <div class="container">
+            <h1>Recruiter Login</h1>
+            <p>
+                <a href="#">Home</a>
+                <span> / Login</span>
+            </p>
+        </div>
+    </div>
+</div>
     <form class="container mt-5" method="post">
         {% csrf_token %}
         <label><b>Email Address</b></label>
@@ -34,22 +153,31 @@
     {% include 'footer.html' %}
 
     {% if error == "no" %}
+{% if error == "no" %}
+<div class="custom-alert success">
+✅ Login successful
+</div>
+
 <script>
-    alert("Login successful");
-    window.location.href = "{% url 'recruiter_home' %}";
+setTimeout(function(){
+    window.location.href="{% url 'recruiter_home' %}";
+},2000);
 </script>
 {% endif %}
 
 {% if error == "yes" %}
-<script>
-    alert("Invalid login credentials , try again...");
-</script>
+<div class="custom-alert error">
+❌ Invalid login credentials
+</div>
 {% endif %}
 
 {% if error == "not" %}
-<script>
-    alert("Your login status is pending...");
-</script>
+<div class="custom-alert warning">
+⚠ Your login status is pending...
+</div>
+{% endif %}
+
+
 {% endif %}
      {% endblock %}
 

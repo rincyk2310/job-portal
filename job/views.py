@@ -4,10 +4,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from datetime import date
 from .models import Job, Recruiter
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
+
 
 # Create your views here.
+
 def index(request):
-    return render(request,'index.html')
+    jobs = Job.objects.all()
+    titles = Job.objects.values_list('title', flat=True).distinct()
+    locations = Job.objects.values_list('location', flat=True).distinct()
+    return render(request,'index.html',{'jobs':jobs,'locations':locations,'titles':titles})
 def admin_login(request):
     error=""
     if request.method == "POST":
@@ -88,7 +96,19 @@ def admin_home(request):
         return redirect('admin_login')
     rcount = Recruiter.objects.all().count()
     scount = studentUser.objects.all().count()
-    d={'rcount':rcount,'scount':scount}
+    # Recruiter status counts
+    pending = Recruiter.objects.filter(status="pending").count()
+    accepted = Recruiter.objects.filter(status="Accept").count()
+    rejected = Recruiter.objects.filter(status="Reject").count()
+
+    # Total jobs posted
+    jobcount = Job.objects.all().count()
+
+    d={'rcount':rcount,'scount':scount,
+       'pending': pending,
+        'accepted': accepted,
+        'rejected': rejected,
+        'jobcount': jobcount}
     return render(request,'admin_home.html',d)
 
 
@@ -455,18 +475,135 @@ def latest_jobs(request):
     d={'job':job}
     return render(request,'latest_jobs.html',d)
 
+# def user_latestjob(request):
+#     job = Job.objects.all().order_by('start_date')
+#     user = request.user
+#     student = studentUser.objects.get(user=user)
+#
+#     # Only get Apply objects with a valid job
+#     # data = Apply.objects.filter(student=student, job__isnull=False)
+#     # li = [i.job.id for i in data]
+#     #
+#     # context = {'job': job, 'li': li}
+#     applications = Apply.objects.filter(student=student)
+#
+#     status_dict = {}
+#     for a in applications:
+#         status_dict[a.job.id] = a.status
+#
+#     context = {
+#         'job': job,
+#         'status_dict': status_dict
+#     }
+#
+#     return render(request, 'user_latestjob.html', context)
+
+# def user_latestjob(request):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     job = Job.objects.all().order_by('-start_date')
+#
+#     user = request.user
+#
+#     student = studentUser.objects.filter(user=user).first()
+#
+#     applications = Apply.objects.filter(student=student)
+#
+#     li = [i.job.id for i in applications]
+#
+#     context = {
+#         'job': job,
+#         'applications': applications,
+#         'li': li
+#     }
+#
+#     return render(request,'user_latestjob.html',context)
+
+
+
+# def user_latestjob(request):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     jobs = Job.objects.all().order_by('-start_date')
+#
+#     student = studentUser.objects.get(user=request.user)
+#
+#     applications = Apply.objects.filter(student=student)
+#
+#     status_dict = {}
+#
+#     for a in applications:
+#         status_dict[a.job.id] = a.status
+#
+#     context = {
+#         'job': jobs,
+#         'status_dict': status_dict
+#     }
+#
+#     return render(request,'user_latestjob.html',context)
+# def user_latestjob(request):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     jobs = Job.objects.all().order_by('-start_date')
+#
+#     student = studentUser.objects.get(user=request.user)
+#
+#     # Applied jobs
+#     applications = Apply.objects.filter(student=student)
+#
+#     status_dict = {}
+#     for a in applications:
+#         status_dict[a.job.id] = a.status
+#
+#     # ⭐ Saved jobs
+#     saved_jobs = SavedJob.objects.filter(student=student)
+#     saved_list = [i.job.id for i in saved_jobs]
+#
+#     context = {
+#         'job': jobs,
+#         'status_dict': status_dict,
+#         'saved_list': saved_list
+#     }
+#
+#     return render(request,'user_latestjob.html',context)
+
+
+
 def user_latestjob(request):
-    job = Job.objects.all().order_by('start_date')
-    user = request.user
-    student = studentUser.objects.get(user=user)
 
-    # Only get Apply objects with a valid job
-    data = Apply.objects.filter(student=student, job__isnull=False)
-    li = [i.job.id for i in data]
+    if not request.user.is_authenticated:
+        return redirect('user_login')
 
-    context = {'job': job, 'li': li}
+    jobs = Job.objects.all().order_by('-start_date')
+
+    student = studentUser.objects.get(user=request.user)
+
+    # ⭐ Applied jobs safely
+    applications = Apply.objects.filter(student=student)
+
+    status_dict = {}
+
+    for a in applications:
+        if a.job is not None:   # ✅ Prevent NoneType error
+            status_dict[a.job.id] = a.status
+
+    # ⭐ Saved jobs
+    saved_jobs = SavedJob.objects.filter(student=student)
+    saved_list = [i.job.id for i in saved_jobs if i.job is not None]
+
+    context = {
+        'job': jobs,
+        'status_dict': status_dict,
+        'saved_list': saved_list
+    }
+
     return render(request, 'user_latestjob.html', context)
-
 
 
 def job_detail(request,pid):
@@ -475,25 +612,297 @@ def job_detail(request,pid):
     return render(request,'job_detail.html',d)
 
 
-def applyjob(request,pid):
+# def applyjob(request,pid):
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#     error=""
+#     user=request.user
+#     student=studentUser.objects.get(user=user)
+#     job = Job.objects.get(id=pid)
+#     date1=date.today()
+#     if job.end_date < date1:
+#         error="close"
+#     elif job.start_date > date1:
+#         error="notopen"
+#     else:
+#         if request.method == "POST":
+#             resume = request.FILES['resume']
+#             Apply.objects.create(student=student,job=job,resume=resume,apply_date=date.today())
+#             error="done"
+#     d={'error':error}
+#     return render(request,'applyjob.html',d)
+
+
+#
+# def applyjob(request,pid):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     error = ""
+#     user = request.user
+#     student = studentUser.objects.get(user=user)
+#     job = Job.objects.get(id=pid)
+#
+#     date1 = date.today()
+#
+#     # 🚫 Check if already applied
+#     if Apply.objects.filter(student=student, job=job).exists():
+#         error = "already"
+#
+#     elif job.end_date < date1:
+#         error = "close"
+#
+#     elif job.start_date > date1:
+#         error = "notopen"
+#
+#     else:
+#         if request.method == "POST":
+#             resume = request.FILES['resume']
+#             Apply.objects.create(
+#                 student=student,
+#                 job=job,
+#                 resume=resume,
+#                 apply_date=date.today()
+#             )
+#             error = "done"
+#
+#     d = {'error': error}
+#     return render(request,'applyjob.html',d)
+#
+#
+#
+
+
+
+# from django.core.mail import send_mail
+# from django.conf import settings
+# from datetime import date
+#
+# def applyjob(request, pid):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     error = ""
+#     user = request.user
+#
+#     student = studentUser.objects.get(user=user)
+#     job = Job.objects.get(id=pid)
+#
+#     today = date.today()
+#
+#     # 🚫 Already applied check
+#     if Apply.objects.filter(student=student, job=job).exists():
+#         error = "already"
+#
+#     elif job.end_date < today:
+#         error = "close"
+#
+#     elif job.start_date > today:
+#         error = "notopen"
+#
+#     else:
+#         if request.method == "POST":
+#
+#             # ⭐ Check resume file exists
+#             if 'resume' not in request.FILES:
+#                 error = "resume_missing"
+#
+#             else:
+#                 resume = request.FILES['resume']
+#
+#                 Apply.objects.create(
+#                     student=student,
+#                     job=job,
+#                     resume=resume,
+#                     apply_date=date.today()
+#                 )
+#
+#                 # ✅ Email Notification
+#                 if request.user.email:
+#                     send_mail(
+#                         'Job Application Confirmation',
+#                         f'Hi {request.user.username},\n\n'
+#                         f'You have successfully applied for {job.title} job.\n'
+#                         'Thank you for using our Job Portal.',
+#                         settings.EMAIL_HOST_USER,
+#                         [request.user.email],
+#                         fail_silently=False,
+#                     )
+#
+#                 error = "done"
+#
+#     return render(request, 'applyjob.html', {'error': error})
+
+
+# def testmail(request):
+#     send_mail(
+#         'Test Mail',
+#         'Django mail is working',
+#         settings.EMAIL_HOST_USER,
+#         ['receiver@gmail.com'],
+#         fail_silently=False,
+#     )
+#
+#     return HttpResponse("Mail sent")
+
+
+
+
+
+# def applyjob(request, pid):
+#
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     error = ""
+#
+#     user = request.user
+#     student = studentUser.objects.get(user=user)
+#     job = Job.objects.get(id=pid)
+#
+#     today = date.today()
+#
+#     if Apply.objects.filter(student=student, job=job).exists():
+#         error = "already"
+#
+#     elif job.end_date < today:
+#         error = "close"
+#
+#     elif job.start_date > today:
+#         error = "notopen"
+#
+#     else:
+#         if request.method == "POST":
+#
+#             if 'resume' not in request.FILES:
+#                 error = "resume_missing"
+#
+#             else:
+#                 resume = request.FILES['resume']
+#
+#                 Apply.objects.create(
+#                     student=student,
+#                     job=job,
+#                     resume=resume,
+#                     apply_date=date.today()
+#                 )
+#
+#                 # ⭐ Send Email
+#                 if request.user.email:
+#
+#                     try:
+#                         send_mail(
+#                             'Job Application Confirmation',
+#                             f'Hi {request.user.username},\n'
+#                             f'You have successfully applied for {job.title}.\n'
+#                             'Thank you for using our Job Portal.',
+#                             settings.EMAIL_HOST_USER,
+#                             [request.user.email],
+#                             fail_silently=False,
+#                         )
+#
+#                     except Exception as e:
+#                         print("Mail Error:", e)
+#
+#                 error = "done"
+#
+#     return render(request, 'applyjob.html', {'error': error})
+
+
+
+
+
+
+def applyjob(request, pid):
+
     if not request.user.is_authenticated:
         return redirect('user_login')
-    error=""
-    user=request.user
-    student=studentUser.objects.get(user=user)
-    job = Job.objects.get(id=pid)
-    date1=date.today()
-    if job.end_date < date1:
-        error="close"
-    elif job.start_date > date1:
-        error="notopen"
-    else:
-        if request.method == "POST":
-            resume = request.FILES['resume']
-            Apply.objects.create(student=student,job=job,resume=resume,apply_date=date.today())
-            error="done"
-    d={'error':error}
-    return render(request,'applyjob.html',d)
+
+    error = ""
+
+    try:
+        user = request.user
+        student = studentUser.objects.get(user=user)
+        job = Job.objects.get(id=pid)
+
+        today = date.today()
+
+        # ✅ Already applied check
+        if Apply.objects.filter(student=student, job=job).exists():
+            error = "already"
+
+        # ✅ Job date validation
+        elif job.end_date < today:
+            error = "close"
+
+        elif job.start_date > today:
+            error = "notopen"
+
+        else:
+
+            if request.method == "POST":
+
+                # ✅ Resume check
+                if 'resume' not in request.FILES:
+                    error = "resume_missing"
+
+                else:
+                    resume = request.FILES['resume']
+
+                    # ⭐ Save Application
+                    Apply.objects.create(
+                        student=student,
+                        job=job,
+                        resume=resume,
+                        apply_date=date.today()
+                    )
+
+                    # ⭐ Email Notification
+                    if request.user.email:
+                        send_mail(
+                            'Job Application Confirmation',
+                            f'''Hi {student.user.username},
+
+                        You have successfully applied for {job.title} job.
+
+                        Thank you for using our Job Portal.''',
+
+                            settings.EMAIL_HOST_USER,
+
+                            [student.user.email, 'projectdemo347@gmail.com'],  # ⭐ Add demo mail
+
+                            fail_silently=False,
+                        )
+
+                    error = "done"
+
+    except Exception as e:
+        print("Error:", e)
+
+    return render(request, 'applyjob.html', {'error': error})
+
+
+def mail_sent(request):
+
+    send_mail(
+        'Job Application Confirmation',
+
+        '''Hi User,
+
+You have successfully applied for the job.
+
+Thank you for using our Job Portal.''',
+
+        settings.EMAIL_HOST_USER,
+
+        ['projectdemo347@gmail.com'],
+
+        fail_silently=False,
+    )
+
+    return HttpResponse("Mail sent check inbox")
 
 def applied_candidates(request):
     if not request.user.is_authenticated:
@@ -505,8 +914,97 @@ def applied_candidates(request):
     d={'data':data}
     return render(request,'applied_candidates.html',d)
 
+def update_status(request, pid, status):
+    if not request.user.is_authenticated:
+        return redirect('recruiter_login')
+
+    application = Apply.objects.get(id=pid)
+
+    # Security check (VERY IMPORTANT)
+    if application.job.recruiter.user != request.user:
+        return redirect('applied_candidates')
+
+    application.status = status
+    application.save()
+
+    return redirect('applied_candidates')
+
+
+
 def contact(request):
     return render(request,'contact.html')
 
+# def search_jobs(request):
+#
+#     title = request.GET.get('title')
+#     location = request.GET.get('location')
+#
+#     jobs = Job.objects.all()
+#
+#     if title:
+#         jobs = jobs.filter(title__icontains=title)
+#
+#     if location:
+#         jobs = jobs.filter(location__icontains=location)
+#
+#     return render(request, "latest_jobs.html", {"jobs": jobs})
+
+def search_jobs(request):
+
+    title = request.GET.get('title','')
+    location = request.GET.get('location','')
+
+    job = Job.objects.all().order_by('-start_date')
+
+    if title or location:
+        job = job.filter(
+            title__icontains=title,
+            location__icontains=location
+        )
+
+    return render(request,"latest_jobs.html",{
+        "job":job
+    })
 
 
+def about(request):
+    return render(request,'about.html')
+
+def services(request):
+    return render(request,'services.html')
+
+
+
+def save_job(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+
+    student = studentUser.objects.get(user=request.user)
+    job = Job.objects.get(id=pid)
+
+    SavedJob.objects.get_or_create(student=student, job=job)
+
+    return redirect('user_latestjob')
+
+# def save_job(request, pid):
+#     if not request.user.is_authenticated:
+#         return redirect('user_login')
+#
+#     student = studentUser.objects.get(user=request.user)
+#     job = Job.objects.get(id=pid)
+#
+#     SavedJob.objects.get_or_create(student=student, job=job)
+#
+#     return redirect('user_latestjob')
+
+
+def saved_jobs(request):
+    student = studentUser.objects.get(user=request.user)
+    jobs = SavedJob.objects.filter(student=student)
+
+    return render(request, 'saved_jobs.html', {'jobs': jobs})
+
+def remove_savedjob(request,id):
+    job = SavedJob.objects.get(id=id)
+    job.delete()
+    return redirect('saved_jobs')

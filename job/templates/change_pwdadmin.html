@@ -6,6 +6,46 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+<style>
+    .custom-alert{
+    position: fixed !important;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: 450px;
+
+    padding: 30px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.3);
+
+    z-index: 99999;
+
+    text-align:center;
+
+    font-size:18px;
+
+    animation: fadeSlide 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+.warning{
+    border-left:6px solid #ffc107;
+}
+</style>
 <body>
 
     {% include 'admin_navigation.html' %}
@@ -49,23 +89,28 @@
 
      {%block content %}
 
-    {% if error == "no" %}
+  {% if error == "no" %}
+<div class="custom-alert success">
+✅ Password changed successfully
+</div>
+
 <script>
-    alert("Password Changed successfully");
-    window.location.href = "{% url 'Logout' %}";
+setTimeout(function(){
+    window.location.href="{% url 'Logout' %}";
+},2000);
 </script>
 {% endif %}
 
 {% if error == "yes" %}
-<script>
-    alert("Invalid password , try again...");
-</script>
+<div class="custom-alert error">
+❌ Invalid password, try again...
+</div>
 {% endif %}
 
 {% if error == "not" %}
-<script>
-    alert("Your current password is wrong , try again...");
-</script>
+<div class="custom-alert warning">
+⚠ Current password is wrong, try again...
+</div>
 {% endif %}
 
      {% endblock %}

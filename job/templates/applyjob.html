@@ -6,6 +6,66 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+<style>
+    .container{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    max-width:600px;
+}
+
+
+    .custom-alert{
+    position: fixed !important;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: 450px;
+
+    padding: 30px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.3);
+
+    z-index: 99999;
+
+    text-align:center;
+
+    font-size:18px;
+
+    animation: fadeSlide 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+.warning{
+    border-left:6px solid #ffc107;
+}
+
+    @keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translate(-50%, -60%);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+</style>
+
 <body>
 
     {% include 'user_navigation.html' %}
@@ -20,7 +80,7 @@
            {% csrf_token %}
            <div class="form-row">
                <label class="font-weight-bold">Upload Resume</label>
-               <input type="file" class="form-control" name="resume" >
+               <input type="file" class="form-control" name="resume" accept=".pdf" required>
            </div>
            <input type="submit" value="submit" class="btn btn-danger mt-3" style="width:100px;">
 
@@ -30,29 +90,69 @@
 
 
 
-     {%block content %}
 
-    {% if error == "close" %}
-<script>
-    alert("Application line are closed , last date is over");
-    window.location.href = "{% url 'user_latestjob' %}";
-</script>
+
+<!--    {% if error == "close" %}-->
+<!--<div class="custom-alert error">-->
+<!--❌ Application line is closed, last date is over-->
+<!--</div>-->
+<!--{% endif %}-->
+
+<!--{% if error == "notopen" %}-->
+<!--<div class="custom-alert warning">-->
+<!--⚠ Application is not open-->
+<!--</div>-->
+<!--{% endif %}-->
+
+<!--{% if error == "done" %}-->
+<!--<div class="custom-alert success">-->
+<!--✅ Job application submitted successfully-->
+<!--</div>-->
+
+<!--<script>-->
+<!--setTimeout(function(){-->
+<!--    window.location.href="{% url 'user_latestjob' %}";-->
+<!--},2000);-->
+<!--</script>-->
+<!--{% endif %}-->
+
+
+    {% if error == "already" %}
+<div class="custom-alert error">
+❌ You have already applied for this job
+</div>
 {% endif %}
 
-    {% if error == "notopen" %}
-<script>
-    alert("Application line is not open");
-    window.location.href = "{% url 'user_latestjob' %}";
-</script>
+{% if error == "close" %}
+<div class="custom-alert error">
+❌ Application line is closed, last date is over
+</div>
+{% endif %}
+
+{% if error == "notopen" %}
+<div class="custom-alert warning">
+⚠ Application is not open
+</div>
+{% endif %}
+
+{% if error == "resume_missing" %}
+<div class="custom-alert warning">
+⚠ Please upload resume file
+</div>
 {% endif %}
 
 {% if error == "done" %}
+<div class="custom-alert success">
+✅ Job application submitted successfully
+</div>
+
 <script>
-    alert("Job Application submitted successfully ");
-     window.location.href = "{% url 'user_latestjob' %}";
+setTimeout(function(){
+    window.location.href="{% url 'user_latestjob' %}";
+},2000);
 </script>
 {% endif %}
-     {% endblock %}
+
 
 </body>
 </html>

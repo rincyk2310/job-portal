@@ -6,6 +6,103 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+<style>
+
+body{
+    background:#f4f6fb;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Candidate Card */
+.candidate-card{
+    background:white;
+    border-radius:15px;
+    padding:50px;
+    margin-bottom:20px;
+    margin-left:30px;
+    box-shadow:0 6px 25px rgba(0,0,0,0.18);
+
+    transition:0.3s ease;
+}
+
+.candidate-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 35px rgba(0,0,0,0.28);
+}
+
+/* Resume Button */
+.resume-btn{
+    background:#0d6efd;
+    color:white;
+    padding:6px 15px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.resume-btn:hover{
+    background:#0b5ed7;
+    color:white;
+}
+
+.candidate-info{
+    font-size:14px;
+    color:#555;
+    margin:3px 0;
+}
+
+
+    .custom-alert{
+    position: fixed !important;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: 450px;
+
+    padding: 30px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.3);
+
+    z-index: 99999;
+
+    text-align:center;
+
+    font-size:18px;
+
+    animation: fadeSlide 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translate(-50%, -40%);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+</style>
+
+
+
+
+
 <body>
 
     {% include 'recruiter_navigation.html' %}
@@ -15,54 +112,99 @@
     </marquee>
     <hr>
 
-    <table class="table table-hover" id="example">
-        <thead>
-            <tr style="background-color:#deb887; text-align:center;">
-                <th>S.No</th>
-                <th>Fill Name</th>
-                <th>EmailID</th>
-                <th>Contact No</th>
-                <th>Job Title</th>
-                <th>Company</th>
-                <th>ApplyDate</th>
-                <th>Resume</th>
-            </tr>
-        </thead>
 
-        <tbody >
-        {% for i in data %}
-            {% if request.user.id == i.job.recruiter.user.id %}
-            <tr style="background-color:#b3d9ff;text-align:center;">
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.student.user.first_name }}{{ i.student.user.last_name }}</td>
-                 <td>{{ i.student.user.username }}</td>
-                <td>{{ i.student.mobile }}</td>
-                <td>{{ i.job.title }}</td>
-                <td>{{ i.job.recruiter.company }}</td>
-                 <td>{{ i.apply_date }}</td>
-                <td><a href="{{i.resume.url}}">Download Resume</a></td>
-            </tr>
-        {% endif %}
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="row">
+
+{% for i in data %}
+
+{% if request.user.id == i.job.recruiter.user.id %}
+
+<div class="col-md-3">
+
+<div class="candidate-card">
+
+<h5 class="text-dark">
+👤 {{ i.student.user.first_name }} {{ i.student.user.last_name }}
+</h5>
+
+<p class="candidate-info">
+📧 {{ i.student.user.username }}
+</p>
+
+<p class="candidate-info">
+📞 {{ i.student.mobile }}
+</p>
+
+<p class="candidate-info">
+🏢 {{ i.job.recruiter.company }}
+</p>
+
+<p class="candidate-info">
+💼 Job : {{ i.job.title }}
+</p>
+
+<p class="candidate-info">
+📅 Apply Date : {{ i.apply_date }}
+</p>
 
 
 
+    <p class="candidate-info">
+📌 Status :
+{% if i.status == "Applied" %}
+    <span class="badge bg-warning">Applied</span>
+{% elif i.status == "Shortlisted" %}
+    <span class="badge bg-success">Shortlisted</span>
+{% else %}
+    <span class="badge bg-danger">Rejected</span>
+{% endif %}
+</p>
+
+
+    <br>
+
+<a href="{% url 'update_status' i.id 'Shortlisted' %}"
+   class="btn btn-success btn-sm">
+   Shortlist
+</a>
+
+<a href="{% url 'update_status' i.id 'Rejected' %}"
+   class="btn btn-danger btn-sm">
+   Reject
+</a>
+    <br><br>
+<a href="{{ i.resume.url }}" class="resume-btn">
+⬇ Download Resume
+</a>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
 
      {%block content %}
 
     {% if error == "no" %}
+<div class="custom-alert success">
+✅ Login successful
+</div>
+
 <script>
-    alert("Login successful");
-    window.location.href = "{% url 'user_home' %}";
+setTimeout(function(){
+    window.location.href="{% url 'user_home' %}";
+},2000);
 </script>
 {% endif %}
 
 {% if error == "yes" %}
-<script>
-    alert("Invalid login credentials , try again...");
-</script>
+<div class="custom-alert error">
+❌ Invalid login credentials , try again...
+</div>
 {% endif %}
      {% endblock %}
 

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+
+<style>
+
+
+
+.navbar{
+    background:#000000 !important;
+}
+
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
+}
+
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
+}
+
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
+}
+    body{
+    background:#eef2f7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.job-card{
+    background:white;
+    border-radius:14px;
+    padding:10px;
+    margin-bottom:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+    transition:0.3s;
+
+    max-width:600px;   /* ⭐ Reduce card width */
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.job-card:hover{
+    transform:translateY(-6px);
+}
+
+.job-title{
+    font-size:20px;
+    font-weight:700;
+    color:#0d6efd;
+}
+
+.job-meta{
+    font-size:14px;
+    color:#555;
+    margin:4px 0;
+}
+
+.view-btn{
+    background:#198754;
+    color:white;
+    padding:7px 18px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.view-btn:hover{
+    background:#157347;
+}
+
+.remove-btn{
+    background:#dc3545;
+    color:white;
+    padding:6px 15px;
+    border-radius:18px;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.remove-btn:hover{
+    background:#bb2d3b;
+    color:white;
+}
+</style>
+<body>
+
+
+    {% include 'user_navigation.html' %}
+<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
+background-color:black; font-weight:bold; margin-top:1%">
+    Saved Jobs
+</marquee>
+
+<hr>
+<h2 style="text-align:center;">⭐ Saved Jobs</h2>
+
+
+<div class="container mt-4">
+
+{% for i in jobs %}
+
+<div class="job-card">
+
+    <div class="job-title">
+        🏢 {{ i.job.title }}
+    </div>
+
+
+    <p class="job-meta">📍 Location : {{ i.job.location }}</p>
+
+    <p class="job-meta">🏢 Company : {{ i.job.recruiter.company }}</p>
+
+    <p class="job-meta">💰 Salary : {{ i.job.salary }}</p>
+
+    <a href="{% url 'job_detail' i.job.id %}" class="view-btn">
+        View Job
+    </a>
+
+    <a href="{% url 'remove_savedjob' i.id %}"
+           class="remove-btn">
+           ❌ Remove
+        </a>
+
+</div>
+
+{% empty %}
+
+<h4 style="text-align:center;color:gray;margin-top:40px;">
+No saved jobs yet
+</h4>
+
+{% endfor %}
+
+</div>
+</body>
+</html>

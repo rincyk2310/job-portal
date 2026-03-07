@@ -59,6 +59,25 @@
     color: var(--sky-blue);
 }
 
+
+
+
+
+        .navbar{
+    background:black !important;
+}
+
+.navbar a{
+    color:white !important;
+}
+
+.dropdown-menu{
+    background:white !important;
+}
+
+.dropdown-item{
+    color:black !important;
+}
 </style>
 
 
@@ -66,23 +85,6 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-sm-3">
-            <img src="{% static 'images/jobe1.png' %}" style="width: 180px; height:150px;">
-        </div>
-        <div class="col-sm-6 mt-5 text-center" >
-            <span style="font-weight :bold; font-size:30px">
-                <span style="color : blue;">Online Job</span>
-                <span style="color : green;">Portal System</span>
-            </span>
-        </div>
-        <div class="col-sm-3 mt-5" style="padding-left:10%">
-<span style="font-weight:bold; font-size:30px;">
-    <span><i class="fa fa-twitter pl-1"></i></span>
-    <span><i class="fa fa-linkedin pl-1"></i></span>
-    <span><i class="fa fa-instagram pl-1"></i></span>
-    <span><i class="fa fa-telegram pl-1"></i></span>
-</span>
-        </div>
 
     </div>
 
@@ -91,10 +93,13 @@
     <a class="navbar-brand text-white pl-5 font-weight-bold" style="font-family:'Monotype Corsiva';font-size:30px;">Job Portal</a>
     <ul class="navbar-nav ml-auto pr-7">
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}" style="margin-left:280px;"><i class="fa fa-home mr-1"></i>Home</a>
+            <a class="nav-link" href="{% url 'index' %}" style="margin-left:100px;"><i class="fa fa-home mr-1"></i>Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'latest_jobs' %}" > <i class="fa fa-users mr-1"></i>Latest Jobs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}" ><i class="fa fa-info-circle mr-1"></i>About</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_login' %}" > <i class="fa fa-user-plus mr-1"></i>User Login</a>
@@ -107,6 +112,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'contact' %}" ><i class="fa fa-sign-in mr-1"></i>Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'services' %}" ><i class="fa fa-briefcase mr-1"></i>Services</a>
         </li>
 
     </ul>

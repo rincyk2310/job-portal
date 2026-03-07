@@ -6,6 +6,43 @@
     <meta charset="UTF-8">
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
+
+<style>
+    .custom-alert{
+    position: fixed !important;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: 450px;
+
+    padding: 30px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.3);
+
+    z-index: 99999;
+
+    text-align:center;
+
+    font-size:18px;
+
+    animation: fadeSlide 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+</style>
 <body>
 
     {% include 'recruiter_navigation.html' %}
@@ -60,25 +97,22 @@ background-color:black; font-weight:bold; margin-top:1%">
 {% include 'footer.html' %}
 
 {% if error == "no" %}
-<script>
-    alert("Company Logo has been updated");
-    window.location = ('{% url 'change_companylogo' job.id %}')
+<div class="custom-alert success">
+✅ Company Logo has been updated
+</div>
 
+<script>
+setTimeout(function(){
+    window.location = "{% url 'change_companylogo' job.id %}";
+},2000);
 </script>
 {% endif %}
 
 {% if error == "yes" %}
-<script>
-    alert("Something went wrong, try again...");
-</script>
+<div class="custom-alert error">
+❌ Something went wrong, try again...
+</div>
 {% endif %}
-
-
-
-</body>
-</html>
-
-
 
 
 

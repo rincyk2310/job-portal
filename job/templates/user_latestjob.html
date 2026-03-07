@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load custom_tags %}
 
 <head>
     <meta charset="UTF-8">
@@ -15,55 +16,81 @@
     </marquee>
     <hr>
 
-    <table class="table table-hover" id="example">
-        <thead>
-            <tr style="background-color:#deb887; text-align:center;">
-                <th>S.No</th>
-                <th>Company Name</th>
-                <th>Job Title</th>
-                <th>Location</th>
-                <th>Start Date</th>
-                 <th>End Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
 
-        <tbody >
-        {% for i in job %}
-            <tr style="background-color:#b3d9ff; text-align:center;">
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.recruiter.company }}</td>
-                 <td>{{ i.title }}</td>
-                <td>{{ i.location }}</td>
-                 <td>{{ i.start_date }}</td>
-                <td>{{ i.end_date }}</td>
-                {% if i.id in li %}
-                <td>Applied</td>
-                {% else %}
-                <td><a href="{% url 'job_detail' i.id %}" class="btn btn-success btn-sm">Apply</a></td>
-                {% endif %}
 
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mt-4">
+
+{% for i in job %}
+
+<div class="job-card">
+
+<div class="job-title">
+🏢 {{ i.recruiter.company }} — {{ i.title }}
+</div>
+
+<p class="job-meta">📍 Location : {{ i.location }}</p>
+<p class="job-meta">📅 Start : {{ i.start_date }}</p>
+<p class="job-meta">📅 End : {{ i.end_date }}</p>
+
+<!--{% if i.id in li %}-->
+<!--<span class="text-success">✔ Applied</span>-->
+<!--{% else %}-->
+<!--<a href="{% url 'job_detail' i.id %}" class="apply-btn">Apply Now</a>-->
+<!--{% endif %}-->
+
+
+    {% if i.id in status_dict %}
+
+    {% if status_dict|get_item:i.id == "Applied" %}
+        <span style="color:orange;">🟡 Applied</span>
+
+    {% elif status_dict|get_item:i.id == "Shortlisted" %}
+        <span style="color:green;">🟢 Shortlisted</span>
+
+    {% elif status_dict|get_item:i.id == "Rejected" %}
+        <span style="color:red;">🔴 Rejected</span>
+
+    {% endif %}
+
+{% else %}
+<a href="{% url 'job_detail' i.id %}" class="apply-btn">Apply Now</a>
+{% endif %}
+
+    <!-- SAVE JOB SECTION -->
+
+{% if i.id in saved_list %}
+    <span style="color:green;">⭐ Saved</span>
+{% else %}
+    <a href="{% url 'save_job' i.id %}" class="save-btn">⭐ Save Job</a>
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+</div>
 
 
 
 
      {%block content %}
+{% if error == "no" %}
+<div class="popup-box success">
+✅ Login successful
+</div>
 
-    {% if error == "no" %}
 <script>
-    alert("Login successful");
-    window.location.href = "{% url 'user_home' %}";
+setTimeout(function(){
+    window.location.href="{% url 'user_home' %}";
+},2000);
 </script>
 {% endif %}
 
+
 {% if error == "yes" %}
-<script>
-    alert("Invalid login credentials , try again...");
-</script>
+<div class="popup-box error">
+❌ Invalid login credentials, try again...
+</div>
 {% endif %}
      {% endblock %}
 
@@ -72,55 +99,110 @@
 
 
 <style>
-:root {
-    --sky-blue: #2c7be5;
-    --sky-blue-dark: #1b5fc1;
+body{
+    background:#eef2f7;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Table */
-table {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: white;
+.job-card{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:20px;
+
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+
+    transition:0.3s;
 }
 
-/* Table Head */
-thead tr {
-    background-color: var(--sky-blue);
-    color: white;
-    text-align: center;
+.job-card:hover{
+    transform:translateY(-6px);
 }
 
-/* Table Body */
-tbody tr {
-    background-color: #f2f8ff;
-    text-align: center;
-    transition: all 0.3s ease;
+/* Job Title */
+.job-title{
+    font-size:20px;
+    font-weight:700;
+    color:#0d6efd;
 }
 
-tbody tr:hover {
-    background-color: #e0eeff;
-    transform: scale(1.01);
+/* Meta Text */
+.job-meta{
+    font-size:14px;
+    color:#555;
+    margin:3px 0;
 }
 
 /* Apply Button */
-.btn-success {
-    background-color: var(--sky-blue);
-    border: none;
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 14px;
-    transition: all 0.3s ease;
+.apply-btn{
+    background:#0d6efd;
+    color:white;
+
+    padding:6px 18px;
+    border-radius:20px;
+
+    text-decoration:none;
+    font-size:14px;
 }
 
-.btn-success:hover {
-    background-color: var(--sky-blue-dark);
-    transform: translateY(-2px);
+.apply-btn:hover{
+    background:#0b5ed7;
+    color:white;
 }
 
-/* HR */
-hr {
-    border-top: 2px solid var(--sky-blue);
+    .popup-box{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:400px;
+    padding:25px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+
+    text-align:center;
+    font-size:18px;
+
+    z-index:99999;
+
+    animation: fadePopup 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+@keyframes fadePopup{
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+}
+
+
+    .save-btn{
+    background:#ffc107;
+    color:black;
+    padding:6px 18px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.save-btn:hover{
+    background:#e0a800;
 }
 </style>

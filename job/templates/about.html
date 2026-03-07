@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'navigation.html' %}
+
+<marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        About Us
+    </marquee>
+
+
+    <div class="page-hero">
+    <img src="{% static 'images/hero_1.jpg' %}" class="page-hero-img">
+
+    <div class="page-hero-overlay">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>
+                <a href="#">Home</a>
+                <span> / About Us</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<section class="stats-section">
+<div class="container text-center">
+
+<h2>Job Portal Statistics</h2>
+<p>Build your career with thousands of opportunities</p>
+
+<div class="row mt-5">
+
+<div class="col-md-3 col-6">
+<div class="stat-box">
+<h2>1930+</h2>
+<p>Candidates</p>
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-box">
+<h2>54+</h2>
+<p>Jobs Posted</p>
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-box">
+<h2>120+</h2>
+<p>Jobs Filled</p>
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-box">
+<h2>550+</h2>
+<p>Companies</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="about-section">
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6 mb-4">
+<img src="{% static 'images/job1.jpg' %}" class="img-fluid about-img">
+</div>
+
+<div class="col-lg-6">
+<h2 class="about-title">Job Portal for Job Seekers</h2>
+
+<p class="about-text">
+Our Job Portal helps job seekers find the best career opportunities
+from top companies. Users can search jobs by title, location, and
+apply directly through the platform.
+</p>
+
+<p class="about-text">
+The system connects candidates and recruiters in one place, making
+the hiring process simple, fast, and efficient.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="row align-items-center mt-5">
+
+<div class="col-lg-6 order-lg-2 mb-4">
+<img src="{% static 'images/ab4.jpg' %}" class="img-fluid about-img">
+</div>
+
+<div class="col-lg-6">
+<h2 class="about-title">Job Portal for Recruiters</h2>
+
+<p class="about-text">
+Recruiters can easily post job openings, manage applications,
+shortlist candidates, and download resumes through the portal.
+</p>
+
+<p class="about-text">
+This platform simplifies recruitment by providing a centralized
+system where companies can connect with talented professionals.
+</p>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="site-section team-section">
+<div class="container">
+
+<div class="row mb-5">
+<div class="col-12 text-center">
+<h2 class="section-title mb-3">Our Development Team</h2>
+<p class="text-muted">
+The team behind the Job Portal system who designed and developed the platform.
+</p>
+</div>
+</div>
+
+<div class="row align-items-center">
+
+<div class="col-md-6">
+<img src="{% static 'images/ab1.webp' %}" class="img-fluid rounded team-img">
+</div>
+
+<div class="col-md-6">
+<h3>Project Developer</h3>
+<p class="text-muted">Full Stack Developer</p>
+
+<p>
+This Job Portal system was developed to help job seekers find opportunities
+and help recruiters hire the right candidates easily. The platform allows
+users to search jobs, apply online, and recruiters to post and manage job
+openings efficiently.
+</p>
+
+<div class="social-icons mt-3">
+<i class="fa fa-facebook mr-3"></i>
+<i class="fa fa-linkedin mr-3"></i>
+<i class="fa fa-github"></i>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="row align-items-center mt-5">
+
+<div class="col-md-6 order-md-2">
+<img src="{% static 'images/ab2.jpg' %}" class="img-fluid rounded team-img">
+</div>
+
+<div class="col-md-6">
+<h3>System Designer</h3>
+<p class="text-muted">UI / UX Designer</p>
+
+<p>
+The system interface is designed to provide a smooth and user-friendly
+experience. The goal of the platform is to connect job seekers with
+companies through a simple and efficient job searching process.
+</p>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {%block content %}
+     {% include 'footer.html' %}
+
+
+ {% endblock %}
+
+</body>
+</html>
+<style>
+
+.navbar{
+    background:#000000 !important;
+}
+
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
+}
+
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
+}
+
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
+}
+
+
+
+
+.page-hero{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.page-hero-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius:10px;
+}
+
+.page-hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+}
+
+.page-hero-overlay h1{
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.page-hero-overlay p{
+    color: white;
+}
+
+.page-hero-overlay a{
+    color: #7ac142;   /* green like screenshot */
+    text-decoration: none;
+}
+
+
+
+
+    /* Stats Section */
+.stats-section{
+  background:#66b266;
+    padding:70px 0;
+    color:white;
+}
+
+.stats-section h2{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.stats-section p{
+    color:#ccc;
+}
+
+/* Stats Boxes */
+.stat-box{
+    padding:25px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.stat-box h2{
+    font-size:42px;
+    font-weight:700;
+    color:#0d6efd;
+}
+
+.stat-box p{
+    font-size:18px;
+    margin-top:8px;
+}
+
+/* Hover Effect */
+.stat-box:hover{
+    transform:translateY(-8px);
+}
+
+
+
+    .about-section{
+padding:80px 0;
+background:#f8f9fa;
+}
+
+.about-title{
+font-weight:700;
+margin-bottom:20px;
+color:#333;
+}
+
+.about-text{
+font-size:16px;
+color:#555;
+line-height:1.7;
+}
+
+.about-img{
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.about-img:hover{
+transform:scale(1.03);
+}
+
+
+
+    .team-section{
+padding:70px 0;
+background:#f9f9f9;
+}
+
+.team-img{
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+}
+
+.section-title{
+font-weight:700;
+}
+
+.social-icons i{
+font-size:20px;
+color:#2c7be5;
+cursor:pointer;
+}
+
+.social-icons i:hover{
+color:#000;
+}
+</style>
+
+
+

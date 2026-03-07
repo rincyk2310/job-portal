@@ -44,14 +44,47 @@ class Job(models.Model):
 
 
 
+# class Apply(models.Model):
+#     job = models.ForeignKey(Job, on_delete=models.CASCADE, null=True, blank=True)
+#     student = models.ForeignKey(studentUser, on_delete=models.CASCADE)
+#     resume = models.FileField(null=True, blank=True, upload_to='resumes/')
+#     apply_date = models.DateField(auto_now_add=True)
+#
+#     def __str__(self):
+#         return f"{self.student.user.username} - {self.job.title if self.job else 'No Job'}"
+
+
+
 class Apply(models.Model):
+
+    STATUS_CHOICES = (
+        ('Applied', 'Applied'),
+        ('Shortlisted', 'Shortlisted'),
+        ('Rejected', 'Rejected'),
+    )
+
     job = models.ForeignKey(Job, on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(studentUser, on_delete=models.CASCADE)
     resume = models.FileField(null=True, blank=True, upload_to='resumes/')
     apply_date = models.DateField(auto_now_add=True)
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='Applied'
+    )
 
     def __str__(self):
         return f"{self.student.user.username} - {self.job.title if self.job else 'No Job'}"
 
 
 
+
+
+class SavedJob(models.Model):
+    student = models.ForeignKey(studentUser, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    saved_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.user.username} - {self.job.title}"

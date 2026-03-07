@@ -11,44 +11,35 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .nav-link{
-        color:white !important;
-        margin-right:4px;
-        }
-        .nav-link:hover{
-        color:yellow !important;
-        font-weight:bold;
-        background-color:red;
-        border-radius:10px;
-        }
-        .navbar-brand:hover{
-        color:yellow !important;
-        margin-right:4px;
-        }
-    </style>
-
 </head>
+
+ <style>
+
+
+.navbar{
+    background:#000000 !important;
+}
+
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
+}
+
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
+}
+
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
+}
+    </style>
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-sm-3">
-            <img src="{% static 'images/jobe1.png' %}" style="width: 180px; height:150px;">
-        </div>
-        <div class="col-sm-6 mt-5 text-center" >
-            <span style="font-weight :bold; font-size:30px">
-                <span style="color : blue;">Online Job</span>
-                <span style="color : green;">Portal System</span>
-            </span>
-        </div>
-        <div class="col-sm-3 mt-5" style="padding-left:10%">
-<span style="font-weight:bold; font-size:30px;">
-    <span><i class="fa fa-twitter pl-1"></i></span>
-    <span><i class="fa fa-linkedin pl-1"></i></span>
-    <span><i class="fa fa-instagram pl-1"></i></span>
-    <span><i class="fa fa-telegram pl-1"></i></span>
-</span>
-        </div>
+
 
     </div>
 
@@ -95,40 +86,26 @@
     --text-light: #ffffff;
 }
 
-/* Navbar */
-.navbar {
-    background-color: var(--sky-blue) !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+
+.navbar{
+    background:#000000 !important;
 }
 
-/* Brand */
-.navbar-brand {
-    color: var(--text-light) !important;
-    font-size: 30px;
-    font-family: 'Monotype Corsiva';
-    transition: color 0.3s ease;
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
 }
 
-.navbar-brand:hover {
-    color: #ffeb3b !important;
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
 }
 
-/* Nav links */
-.nav-link {
-    color: var(--text-light) !important;
-    margin-right: 8px;
-    padding: 8px 14px;
-    transition: all 0.3s ease;
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
 }
-
-/* Hover effect */
-.nav-link:hover {
-    background-color: var(--sky-blue-dark);
-    border-radius: 8px;
-    transform: translateY(-2px);
-    color: #ffeb3b !important;
-}
-
 /* Icons */
 .fa {
     transition: transform 0.3s ease;

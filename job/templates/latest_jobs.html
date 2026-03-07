@@ -10,59 +10,99 @@
 
     {% include 'navigation.html' %}
 
-    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
-        Latest Job Openings
+<marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
+        Latest jobs
     </marquee>
-    <hr>
 
-    <table class="table table-hover" id="example">
-        <thead>
-            <tr style="background-color:#deb887; text-align:center;">
-                <th>S.No</th>
-                <th>Company Name</th>
-                <th>Job Title</th>
-                <th>Location</th>
-                <th>Start Date</th>
-                 <th>End Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    <div class="page-hero">
+    <img src="{% static 'images/hero_1.jpg' %}" class="page-hero-img">
 
-        <tbody >
-        {% for i in job %}
-            <tr style="background-color:#b3d9ff;    text-align:center;">
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.recruiter.company }}</td>
-                 <td>{{ i.title }}</td>
-                <td>{{ i.location }}</td>
-                 <td>{{ i.start_date }}</td>
-                <td>{{ i.end_date }}</td>
+    <div class="page-hero-overlay">
+        <div class="container">
+            <h1>Latest Job Openings</h1>
+            <p>
+                <a href="#">Home</a>
+                <span> / Latest Jobs</span>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid px-5 mt-4">
 
-                <td><a href="{% url 'user_login' %}" class="btn btn-success btn-sm">Login To Apply</a>
-                </td>
+{% if job %}
 
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="row mt-4">
 
+{% for i in job %}
 
+<div class="col-md-4 mb-4">
+    <div class="card job-card shadow">
+
+        <div class="card-body">
+
+            <h5 class="card-title text-primary">
+                {{ i.title }}
+            </h5>
+
+            <h6 class="text-muted">
+                {{ i.recruiter.company }}
+            </h6>
+
+            <p class="small">📍 {{ i.location }}</p>
+            <p class="small">📅 Start: {{ i.start_date }}</p>
+            <p class="small">📅 End: {{ i.end_date }}</p>
+            <p class="small">💼 Experience: {{ i.experience }}</p>
+            <p class="small">💰 Salary: {{ i.salary }}</p>
+
+            <p class="small text-muted">
+                {{ i.description|truncatewords:15 }}
+            </p>
+
+            <a href="{% url 'user_login' %}" class="btn btn-success btn-sm w-100">
+                Login To Apply
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="text-center mt-5">
+    <h4 style="color:red;">No jobs found for this title and location.</h4>
+</div>
+
+{% endif %}
+
+</div>
 
 
      {%block content %}
-
+ {% include 'footer.html' %}
     {% if error == "no" %}
+<div class="popup-box success">
+✅ Login successful
+</div>
+
 <script>
-    alert("Login successful");
-    window.location.href = "{% url 'user_home' %}";
+setTimeout(function(){
+    window.location.href="{% url 'user_home' %}";
+},2000);
 </script>
 {% endif %}
+
 
 {% if error == "yes" %}
-<script>
-    alert("Invalid login credentials , try again...");
-</script>
+<div class="popup-box error">
+❌ Invalid login credentials, try again...
+</div>
 {% endif %}
+
      {% endblock %}
 
 </body>
@@ -70,42 +110,133 @@
 
 
 <style>
-    .job-header h2 {
-        font-weight: 700;
-    }
 
-    .job-header p {
-        font-size: 15px;
-    }
+    .job-card{
+    border-radius: 15px;
+    transition: 0.3s ease;
+    border: none;
+}
 
-    table {
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        overflow: hidden;
-    }
+.job-card:hover{
+    transform: translateY(-8px);
+}
 
-    thead tr {
-        text-align: center;
-    }
+.job-card .card-body{
+    padding: 20px;
+}
 
-    tbody tr {
-        text-align: center;
-        transition: all 0.3s ease;
-    }
+    .popup-box{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 
-    tbody tr:hover {
-        transform: scale(1.01);
-    }
+    width:420px;
+    padding:25px;
 
-    .btn-apply {
-       border-radius: 20px;
-        padding: 5px 15px;
-        font-size: 14px;
-    }
+    background:white;
 
-    .btn-apply:hover {
-        color: white;
+    border-radius:15px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+
+    text-align:center;
+    font-size:18px;
+
+    z-index:99999;
+
+    animation: fadePopup 0.4s ease;
+}
+
+.success{
+    border-left:6px solid #28a745;
+}
+
+.error{
+    border-left:6px solid #dc3545;
+}
+
+@keyframes fadePopup{
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%);
     }
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+}
+
+
+
+.navbar{
+    background:#000000 !important;
+}
+
+/* Navbar text white */
+.navbar a{
+    color:white !important;
+    font-weight:500;
+}
+
+/* Navbar brand logo */
+.navbar-brand{
+    color:white !important;
+}
+
+/* Navbar hover effect */
+.navbar a:hover{
+    color:#90caf9 !important;
+}
+
+
+
+
+.page-hero{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.page-hero-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius:10px;
+}
+
+.page-hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+}
+
+.page-hero-overlay h1{
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.page-hero-overlay p{
+    color: white;
+}
+
+.page-hero-overlay a{
+    color: #7ac142;   /* green like screenshot */
+    text-decoration: none;
+}
+
+    .no-job{
+    text-align:center;
+    font-size:24px;
+    margin-top:60px;
+    color:#87CEEB;
+    font-weight:600;
+}
 </style>
 
 
