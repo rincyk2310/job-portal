@@ -63,4 +63,5 @@ urlpatterns = [
     path('remove_savedjob/<int:id>/', remove_savedjob, name='remove_savedjob'),
     path('mailsent/', mail_sent),
     path('delete_job/<int:pid>/', delete_job, name='delete_job'),
+    path('view_messages/', view_messages, name='view_messages'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

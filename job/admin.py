@@ -6,5 +6,6 @@ from .models import *
 admin.site.register(studentUser)
 admin.site.register(Recruiter)
 admin.site.register(Job)
+admin.site.register(Contact)
 
 

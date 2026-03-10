@@ -27,13 +27,43 @@ background-color:black; font-weight:bold; margin-top:1%">
         <div class="container">
             <h1>Contact Us</h1>
             <p>
-                <a href="#">Home </a>
+                <a href="{% url 'index' %}">Home </a>
                 <span>/ Contacts</span>
             </p>
         </div>
     </div>
 </div>
 <br><br><br><br>
+
+<div class="container mt-5">
+
+<h3 class="text-center mb-4">Send Us a Message</h3>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<input type="text" class="form-control" name="name" placeholder="Your Name" required>
+</div>
+
+<div class="form-group col-md-6">
+<input type="email" class="form-control" name="email" placeholder="Your Email" required>
+</div>
+</div>
+
+<div class="form-group">
+<textarea class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea>
+</div>
+
+<div class="text-center">
+    <button class="btn btn-primary">Send Message</button>
+</div>
+
+</form>
+
+</div>
+<br><br>
 <div class="container mt-5 shadow-lg " >
     <div class="row" >
         <div class="col-sm-3 contact-box" >
@@ -60,24 +90,37 @@ background-color:black; font-weight:bold; margin-top:1%">
     </div>
 
 </div>
-
-
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
  {% include 'footer.html' %}
 </body>
 </html>
 <style>
-    .contact-box {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
-    }
+    .contact-row{
+    display:flex;
+    gap:10px;          /* space between boxes */
+    flex-wrap:nowrap;  /* keep all in one line */
+}
 
-    .contact-box:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+.contact-box{
+    flex:1;            /* equal width for all boxes */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor:pointer;
+    box-shadow:0 8px 15px rgba(0,0,0,0.7);
+    padding:25px;
+    background:white;
+    border-radius:10px;
 
+}
+
+.contact-box i{
+    font-size:22px;
+    color:#0d6efd;
+}
+
+.contact-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
      .page-hero{
     position: relative;
     width: 100%;
@@ -114,5 +157,46 @@ background-color:black; font-weight:bold; margin-top:1%">
     color: #7ac142;
     text-decoration: none;
 }
+
+
+
+
+body{
+background:#f4f6f9;
+}
+
+.contact-box{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0px 4px 15px rgba(0,0,0,0.1);
+}
+
+.contact-box h3{
+font-weight:600;
+color:#333;
+}
+
+.form-control{
+border-radius:8px;
+padding:12px;
+}
+
+textarea{
+resize:none;
+}
+
+.btn-primary{
+padding:10px 30px;
+border-radius:8px;
+font-weight:500;
+
+}
+
+.btn-primary:hover{
+background:#0056b3;
+}
+
+
 </style>
 

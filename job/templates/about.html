@@ -22,7 +22,7 @@
         <div class="container">
             <h1>About Us</h1>
             <p>
-                <a href="#">Home</a>
+                <a href="{% url 'index' %}">Home</a>
                 <span> / About Us</span>
             </p>
         </div>
@@ -32,93 +32,91 @@
 
 
 <section class="stats-section">
-<div class="container text-center">
+    <div class="container text-center">
 
-<h2>Job Portal Statistics</h2>
-<p>Build your career with thousands of opportunities</p>
+        <h2>Job Portal Statistics</h2>
+        <p>Build your career with thousands of opportunities</p>
 
 <div class="row mt-5">
+    <div class="col-md-3 col-6">
+        <div class="stat-box">
+            <h2>1930+</h2>
+            <p>Candidates</p>
+        </div>
+    </div>
 
-<div class="col-md-3 col-6">
-<div class="stat-box">
-<h2>1930+</h2>
-<p>Candidates</p>
-</div>
-</div>
+    <div class="col-md-3 col-6">
+        <div class="stat-box">
+            <h2>54+</h2>
+            <p>Jobs Posted</p>
+        </div>
+    </div>
 
-<div class="col-md-3 col-6">
-<div class="stat-box">
-<h2>54+</h2>
-<p>Jobs Posted</p>
-</div>
-</div>
+    <div class="col-md-3 col-6">
+        <div class="stat-box">
+            <h2>120+</h2>
+            <p>Jobs Filled</p>
+        </div>
+    </div>
 
-<div class="col-md-3 col-6">
-<div class="stat-box">
-<h2>120+</h2>
-<p>Jobs Filled</p>
-</div>
-</div>
+    <div class="col-md-3 col-6">
+        <div class="stat-box">
+            <h2>550+</h2>
+            <p>Companies</p>
+        </div>
+    </div>
 
-<div class="col-md-3 col-6">
-<div class="stat-box">
-<h2>550+</h2>
-<p>Companies</p>
-</div>
-</div>
-
-</div>
+    </div>
 </div>
 </section>
 
 <section class="about-section">
-<div class="container">
+    <div class="container">
 
-<div class="row align-items-center">
+        <div class="row align-items-center">
 
-<div class="col-lg-6 mb-4">
-<img src="{% static 'images/job1.jpg' %}" class="img-fluid about-img">
-</div>
+            <div class="col-lg-6 mb-4">
+                <img src="{% static 'images/job1.jpg' %}" class="img-fluid about-img">
+            </div>
 
-<div class="col-lg-6">
-<h2 class="about-title">Job Portal for Job Seekers</h2>
+            <div class="col-lg-6">
+                <h2 class="about-title">Job Portal for Job Seekers</h2>
 
-<p class="about-text">
-Our Job Portal helps job seekers find the best career opportunities
-from top companies. Users can search jobs by title, location, and
-apply directly through the platform.
-</p>
+            <p class="about-text">
+                Our Job Portal helps job seekers find the best career opportunities
+                from top companies. Users can search jobs by title, location, and
+                apply directly through the platform.
+            </p>
 
-<p class="about-text">
-The system connects candidates and recruiters in one place, making
-the hiring process simple, fast, and efficient.
-</p>
+            <p class="about-text">
+                The system connects candidates and recruiters in one place, making
+                the hiring process simple, fast, and efficient.
+            </p>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
 
 <div class="row align-items-center mt-5">
 
-<div class="col-lg-6 order-lg-2 mb-4">
-<img src="{% static 'images/ab4.jpg' %}" class="img-fluid about-img">
-</div>
+    <div class="col-lg-6 order-lg-2 mb-4">
+        <img src="{% static 'images/ab4.jpg' %}" class="img-fluid about-img">
+    </div>
 
-<div class="col-lg-6">
-<h2 class="about-title">Job Portal for Recruiters</h2>
+    <div class="col-lg-6">
+        <h2 class="about-title">Job Portal for Recruiters</h2>
 
-<p class="about-text">
-Recruiters can easily post job openings, manage applications,
-shortlist candidates, and download resumes through the portal.
-</p>
+        <p class="about-text">
+        Recruiters can easily post job openings, manage applications,
+        shortlist candidates, and download resumes through the portal.
+        </p>
+        <p class="about-text">
+            This platform simplifies recruitment by providing a centralized
+            system where companies can connect with talented professionals.
+        </p>
 
-<p class="about-text">
-This platform simplifies recruitment by providing a centralized
-system where companies can connect with talented professionals.
-</p>
-
-</div>
+    </div>
 
 </div>
 
@@ -169,7 +167,7 @@ openings efficiently.
 <div class="row align-items-center mt-5">
 
 <div class="col-md-6 order-md-2">
-<img src="{% static 'images/ab2.jpg' %}" class="img-fluid rounded team-img">
+<img src="{% static 'images/person_6.jpg' %}" class="img-fluid rounded team-img">
 </div>
 
 <div class="col-md-6">
@@ -188,18 +186,6 @@ companies through a simple and efficient job searching process.
 
 </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 
  {%block content %}
      {% include 'footer.html' %}

@@ -25,6 +25,7 @@ class Recruiter(models.Model):
     def _str_(self):
         return self.user.username
 
+
 class Job(models.Model):
     recruiter=models.ForeignKey(Recruiter,on_delete=models.CASCADE)
     start_date=models.DateField()
@@ -41,17 +42,6 @@ class Job(models.Model):
 
     def _str_(self):
         return self.title
-
-
-
-# class Apply(models.Model):
-#     job = models.ForeignKey(Job, on_delete=models.CASCADE, null=True, blank=True)
-#     student = models.ForeignKey(studentUser, on_delete=models.CASCADE)
-#     resume = models.FileField(null=True, blank=True, upload_to='resumes/')
-#     apply_date = models.DateField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f"{self.student.user.username} - {self.job.title if self.job else 'No Job'}"
 
 
 
@@ -88,3 +78,13 @@ class SavedJob(models.Model):
 
     def __str__(self):
         return f"{self.student.user.username} - {self.job.title}"
+
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

@@ -3,7 +3,7 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from datetime import date
-from .models import Job, Recruiter
+from .models import Job, Recruiter ,Contact
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
@@ -16,6 +16,8 @@ def index(request):
     titles = Job.objects.values_list('title', flat=True).distinct()
     locations = Job.objects.values_list('location', flat=True).distinct()
     return render(request,'index.html',{'jobs':jobs,'locations':locations,'titles':titles})
+
+
 def admin_login(request):
     error=""
     if request.method == "POST":
@@ -32,11 +34,34 @@ def admin_login(request):
             error="yes"
     d={'error':error}
     return render(request,'admin_login.html',d)
+
+def admin_home(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    rcount = Recruiter.objects.all().count()
+    scount = studentUser.objects.all().count()
+    # Recruiter status counts
+    pending = Recruiter.objects.filter(status="pending").count()
+    accepted = Recruiter.objects.filter(status="Accept").count()
+    rejected = Recruiter.objects.filter(status="Reject").count()
+
+    # Total jobs posted
+    jobcount = Job.objects.all().count()
+
+    d={'rcount':rcount,
+       'scount':scount,
+       'pending': pending,
+        'accepted': accepted,
+        'rejected': rejected,
+        'jobcount': jobcount}
+    return render(request,'admin_home.html',d)
+
+
 def user_login(request):
     error=""
     if request.method == "POST":
-        u=request.POST['uname'];
-        p=request.POST['pwd'];
+        u=request.POST['uname']
+        p=request.POST['pwd']
         user=authenticate(username=u,password=p)
         if user :
             try:
@@ -52,11 +77,12 @@ def user_login(request):
             error="yes"
     d={'error':error}
     return render(request,'user_login.html',d)
+
 def recruiter_login(request):
     error = ""
     if request.method == "POST":
-        u = request.POST['uname'];
-        p = request.POST['pwd'];
+        u = request.POST['uname']
+        p = request.POST['pwd']
         user = authenticate(username=u, password=p)
         if user:
             try:
@@ -72,6 +98,8 @@ def recruiter_login(request):
             error = "yes"
     d = {'error': error}
     return render(request,'recruiter_login.html',d)
+
+
 def recruiter_signup(request):
     error = ""
     if request.method == "POST":
@@ -91,37 +119,18 @@ def recruiter_signup(request):
             error = "yes"
     d = {'error': error}
     return render(request,'recruiter_signup.html',d)
-def admin_home(request):
-    if not request.user.is_authenticated:
-        return redirect('admin_login')
-    rcount = Recruiter.objects.all().count()
-    scount = studentUser.objects.all().count()
-    # Recruiter status counts
-    pending = Recruiter.objects.filter(status="pending").count()
-    accepted = Recruiter.objects.filter(status="Accept").count()
-    rejected = Recruiter.objects.filter(status="Reject").count()
-
-    # Total jobs posted
-    jobcount = Job.objects.all().count()
-
-    d={'rcount':rcount,'scount':scount,
-       'pending': pending,
-        'accepted': accepted,
-        'rejected': rejected,
-        'jobcount': jobcount}
-    return render(request,'admin_home.html',d)
 
 
 
 
 def user_home(request):
-    # 🔐 login check
+    #  login check
     if not request.user.is_authenticated:
         return redirect('user_login')
 
     user = request.user
 
-    # ✅ auto-create student profile if not exists
+    #  auto-create student profile if not exists
     student, created = studentUser.objects.get_or_create(user=user)
 
     error = None
@@ -166,14 +175,14 @@ def user_home(request):
 
 
 def recruiter_home(request):
-    # 🔐 login check
+    #  login check
     if not request.user.is_authenticated:
         return redirect('recruiter_login')
 
     user = request.user
     recruiter = Recruiter.objects.filter(user=user).first()
 
-    # 🚫 recruiter profile not created yet
+    #  recruiter profile not created yet
     if not recruiter:
         return redirect('recruiter_profile')  # or recruiter_signup
 
@@ -219,6 +228,8 @@ def Logout(request):
     return redirect('index')
 
     return render(request,'user_home.html')
+
+
 def user_signup(request):
     error=""
     if request.method=="POST":
@@ -485,7 +496,7 @@ def user_latestjob(request):
 
     student = studentUser.objects.get(user=request.user)
 
-    # ⭐ Applied jobs safely
+    #  Applied jobs safely
     applications = Apply.objects.filter(student=student)
 
     status_dict = {}
@@ -494,7 +505,7 @@ def user_latestjob(request):
         if a.job is not None:   # ✅ Prevent NoneType error
             status_dict[a.job.id] = a.status
 
-    # ⭐ Saved jobs
+    #  Saved jobs
     saved_jobs = SavedJob.objects.filter(student=student)
     saved_list = [i.job.id for i in saved_jobs if i.job is not None]
 
@@ -514,8 +525,6 @@ def job_detail(request,pid):
 
 
 
-
-
 def applyjob(request, pid):
 
     if not request.user.is_authenticated:
@@ -530,11 +539,11 @@ def applyjob(request, pid):
 
         today = date.today()
 
-        # ✅ Already applied check
+        #  Already applied check
         if Apply.objects.filter(student=student, job=job).exists():
             error = "already"
 
-        # ✅ Job date validation
+        #  Job date validation
         elif job.end_date < today:
             error = "close"
 
@@ -545,14 +554,14 @@ def applyjob(request, pid):
 
             if request.method == "POST":
 
-                # ✅ Resume check
+                #  Resume check
                 if 'resume' not in request.FILES:
                     error = "resume_missing"
 
                 else:
                     resume = request.FILES['resume']
 
-                    # ⭐ Save Application
+                    #  Save Application
                     Apply.objects.create(
                         student=student,
                         job=job,
@@ -560,7 +569,7 @@ def applyjob(request, pid):
                         apply_date=date.today()
                     )
 
-                    # ⭐ Email Notification
+                    #  Email Notification
                     if request.user.email:
                         send_mail(
                             'Job Application Confirmation',
@@ -572,7 +581,7 @@ def applyjob(request, pid):
 
                             settings.EMAIL_HOST_USER,
 
-                            [student.user.email, 'projectdemo347@gmail.com'],  # ⭐ Add demo mail
+                            [student.user.email, 'projectdemo347@gmail.com'],  #  Add demo mail
 
                             fail_silently=False,
                         )
@@ -605,15 +614,17 @@ Thank you for using our Job Portal.''',
 
     return HttpResponse("Mail sent check inbox")
 
+
+
 def applied_candidates(request):
     if not request.user.is_authenticated:
         return redirect('recruiter_login')
 
     data=Apply.objects.all()
 
-
     d={'data':data}
     return render(request,'applied_candidates.html',d)
+
 
 def update_status(request, pid, status):
     if not request.user.is_authenticated:
@@ -633,22 +644,24 @@ def update_status(request, pid, status):
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        Contact.objects.create(
+            name=name,
+            email=email,
+            message=message
+        )
+
     return render(request,'contact.html')
 
-# def search_jobs(request):
-#
-#     title = request.GET.get('title')
-#     location = request.GET.get('location')
-#
-#     jobs = Job.objects.all()
-#
-#     if title:
-#         jobs = jobs.filter(title__icontains=title)
-#
-#     if location:
-#         jobs = jobs.filter(location__icontains=location)
-#
-#     return render(request, "latest_jobs.html", {"jobs": jobs})
+
+def view_messages(request):
+    messages = Contact.objects.all()
+    return render(request,'view_messages.html',{'messages':messages})
+
 
 def search_jobs(request):
 
@@ -687,16 +700,6 @@ def save_job(request, pid):
 
     return redirect('user_latestjob')
 
-# def save_job(request, pid):
-#     if not request.user.is_authenticated:
-#         return redirect('user_login')
-#
-#     student = studentUser.objects.get(user=request.user)
-#     job = Job.objects.get(id=pid)
-#
-#     SavedJob.objects.get_or_create(student=student, job=job)
-#
-#     return redirect('user_latestjob')
 
 
 def saved_jobs(request):

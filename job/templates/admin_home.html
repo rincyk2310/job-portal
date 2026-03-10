@@ -30,40 +30,39 @@ background-color:black; font-weight:bold; margin-top:1%">
             <p class="text-center font-weight-bold">{{scount}}</p>
         </div>
 
-<div class="container mt-5">
+                <div class="container mt-5">
 
-<div class="row text-center">
+                <div class="row text-center">
 
-<div class="col-md-3">
-<div class="dashboard-card">
-<h5>Pending Recruiters</h5>
-<h2>{{ pending }}</h2>
-</div>
-</div>
+                <div class="col-md-3">
+                <div class="dashboard-card">
+                <h5>Pending Recruiters</h5>
+                <h2>{{ pending }}</h2>
+                </div>
+                </div>
 
-<div class="col-md-3">
-<div class="dashboard-card">
-<h5>Accepted Recruiters</h5>
-<h2>{{ accepted }}</h2>
-</div>
-</div>
+                <div class="col-md-3">
+                <div class="dashboard-card">
+                <h5>Accepted Recruiters</h5>
+                <h2>{{ accepted }}</h2>
+                </div>
+                </div>
 
-<div class="col-md-3">
-<div class="dashboard-card">
-<h5>Rejected Recruiters</h5>
-<h2>{{ rejected }}</h2>
-</div>
-</div>
+                <div class="col-md-3">
+                <div class="dashboard-card">
+                <h5>Rejected Recruiters</h5>
+                <h2>{{ rejected }}</h2>
+                </div>
+                </div>
 
-<div class="col-md-3">
-<div class="dashboard-card">
-<h5>Total Jobs Posted ✔</h5>
-<h2>{{ jobcount }}</h2>
-</div>
-</div>
-
-</div>
-</div>
+                <div class="col-md-3">
+                <div class="dashboard-card">
+                <h5>Total Jobs Posted ✔</h5>
+                <h2>{{ jobcount }}</h2>
+                </div>
+                </div>
+                </div>
+                </div>
     </div>
 
 </div>
@@ -208,58 +207,31 @@ setTimeout(function(){
 
     .custom-alert{
     position: fixed !important;
-
     top: 50%;
     left: 50%;
-
     transform: translate(-50%, -50%) !important;
-
     width: 500px;
-
     padding: 30px;
-
     background:white;
-
     border-radius:15px;
-
     box-shadow:0 12px 40px rgba(0,0,0,0.3);
-
     z-index: 99999;
-
     text-align:center;
-
     font-size:18px;
 }
 
-
-
-
-
-
-<!--    .chart-box{-->
-<!--    background:white;-->
-<!--    padding:30px;-->
-<!--    border-radius:18px;-->
-<!--    box-shadow:0 6px 25px rgba(0,0,0,0.12);-->
-<!--    transition:0.3s ease;-->
-<!--}-->
 .chart-box{
     background:white;
     padding:20px;
     border-radius:18px;
     box-shadow:0 6px 25px rgba(0,0,0,0.12);
-
     width: 60%;      /* Control width */
     height: 350px;   /* Control height */
-
     margin: auto;    /* Center align */
     display:flex;
     justify-content:center;
     align-items:center;
 }
-
-
-
 .chart-box:hover{
     transform: translateY(-6px);
     box-shadow:0 10px 35px rgba(0,0,0,0.22);
