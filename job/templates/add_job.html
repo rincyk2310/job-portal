@@ -87,6 +87,38 @@ label{
 
     font-size:18px;
 }
+
+
+
+     .marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+    position: relative;
+    height: 40px;
+}
+
+.marquee span {
+    position: absolute;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    animation: moveText 15s linear infinite;
+}
+
+/* Right → Left movement */
+@keyframes moveText {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
 </style>
 
 <body>
@@ -94,10 +126,11 @@ label{
     {% include 'recruiter_navigation.html' %}
 
 
-<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
-background-color:black; font-weight:bold; margin-top:1%">
-   Add Job Details
-</marquee>
+
+
+<div class="marquee">
+    <span>Add Job Details</span>
+</div>
 
 <hr>
 

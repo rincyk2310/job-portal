@@ -82,15 +82,45 @@
     color: #7ac142;
     text-decoration: none;
 }
+
+     .marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+    position: relative;
+    height: 40px;
+}
+
+.marquee span {
+    position: absolute;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    animation: moveText 15s linear infinite;
+}
+
+/* Right → Left movement */
+@keyframes moveText {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
 </style>
 <body>
 
     {% include 'navigation.html' %}
 
 
-    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
-        Admin Login
-    </marquee>
+    <div>
+        <span>Admin Login</span>
+    </div>
 
 <div class="page-hero">
     <img src="{% static 'images/hero_1.jpg' %}" class="page-hero-img">

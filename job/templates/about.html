@@ -10,9 +10,9 @@
 
     {% include 'navigation.html' %}
 
-<marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
-        About Us
-    </marquee>
+    <div class="marquee">
+    <span>About Us</span>
+</div>
 
 
     <div class="page-hero">
@@ -127,62 +127,62 @@
 <section class="site-section team-section">
 <div class="container">
 
-<div class="row mb-5">
-<div class="col-12 text-center">
-<h2 class="section-title mb-3">Our Development Team</h2>
-<p class="text-muted">
-The team behind the Job Portal system who designed and developed the platform.
-</p>
-</div>
-</div>
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h2 class="section-title mb-3">Our Development Team</h2>
+            <p class="text-muted">
+            The team behind the Job Portal system who designed and developed the platform.
+            </p>
+        </div>
+    </div>
 
-<div class="row align-items-center">
+    <div class="row align-items-center">
 
-<div class="col-md-6">
-<img src="{% static 'images/ab1.webp' %}" class="img-fluid rounded team-img">
-</div>
+        <div class="col-md-6">
+            <img src="{% static 'images/ab1.webp' %}" class="img-fluid rounded team-img">
+        </div>
 
-<div class="col-md-6">
-<h3>Project Developer</h3>
-<p class="text-muted">Full Stack Developer</p>
+    <div class="col-md-6">
+        <h3>Project Developer</h3>
+        <p class="text-muted">Full Stack Developer</p>
 
-<p>
-This Job Portal system was developed to help job seekers find opportunities
-and help recruiters hire the right candidates easily. The platform allows
-users to search jobs, apply online, and recruiters to post and manage job
-openings efficiently.
-</p>
+            <p>
+            This Job Portal system was developed to help job seekers find opportunities
+            and help recruiters hire the right candidates easily. The platform allows
+            users to search jobs, apply online, and recruiters to post and manage job
+            openings efficiently.
+            </p>
 
-<div class="social-icons mt-3">
-<i class="fa fa-facebook mr-3"></i>
-<i class="fa fa-linkedin mr-3"></i>
-<i class="fa fa-github"></i>
-</div>
+        <div class="social-icons mt-3">
+            <i class="fa fa-facebook mr-3"></i>
+            <i class="fa fa-linkedin mr-3"></i>
+            <i class="fa fa-github"></i>
+        </div>
 
-</div>
+    </div>
 
 </div>
 
 
 <div class="row align-items-center mt-5">
 
-<div class="col-md-6 order-md-2">
-<img src="{% static 'images/person_6.jpg' %}" class="img-fluid rounded team-img">
-</div>
+    <div class="col-md-6 order-md-2">
+        <img src="{% static 'images/person_6.jpg' %}" class="img-fluid rounded team-img">
+    </div>
 
-<div class="col-md-6">
-<h3>System Designer</h3>
-<p class="text-muted">UI / UX Designer</p>
+    <div class="col-md-6">
+        <h3>System Designer</h3>
+        <p class="text-muted">UI / UX Designer</p>
 
-<p>
-The system interface is designed to provide a smooth and user-friendly
-experience. The goal of the platform is to connect job seekers with
-companies through a simple and efficient job searching process.
-</p>
+        <p>
+        The system interface is designed to provide a smooth and user-friendly
+        experience. The goal of the platform is to connect job seekers with
+        companies through a simple and efficient job searching process.
+        </p>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </div>
 </section>
@@ -353,6 +353,37 @@ cursor:pointer;
 
 .social-icons i:hover{
 color:#000;
+}
+
+
+    .marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+    position: relative;
+    height: 40px;
+}
+
+.marquee span {
+    position: absolute;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    animation: moveText 15s linear infinite;
+}
+
+/* Right → Left movement */
+@keyframes moveText {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
 }
 </style>
 

@@ -7,6 +7,36 @@
     <title>{% block title %}Job Portal{% endblock %}</title>
 </head>
 <style>
+
+     .marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+    position: relative;
+    height: 40px;
+}
+
+.marquee span {
+    position: absolute;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    animation: moveText 15s linear infinite;
+}
+
+/* Right → Left movement */
+@keyframes moveText {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
     .container{
     background:white;
     border-radius:15px;
@@ -70,9 +100,10 @@
 
     {% include 'user_navigation.html' %}
 
-    <marquee style="font-family:'Monotype Corsiva' ; font-size:25px; color:darkcyan; background-color:black; font-weight: bold; margin-top:1%">
-         Apply For  Job
-    </marquee>
+
+    <div>
+        <span>Apply For Job</span>
+    </div>
     <hr>
 
    <div class="container shadow-lg py-2 mb-2">

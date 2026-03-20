@@ -7,6 +7,72 @@
     <title>Job Portal</title>
 </head>
 <style>
+
+/* Background */
+body{
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    font-family: Arial, sans-serif;
+}
+
+/* Center container */
+.signup-container{
+    display: flex;
+    justify-content: center;
+
+    height: 100vh;
+    align-items: flex-start;
+}
+
+/* Form Box */
+.signup-box{
+    width: 520px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: slideIn 0.8s ease;
+     margin-top: 100px;
+
+}
+
+/* Animation from left */
+@keyframes slideIn{
+    from{
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Inputs */
+.form-control{
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-success{
+    background-color:#14532d;    /* parrot green */
+    border: none;
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-success:hover{
+    background-color: #3cb371;   /* slightly darker on hover */
+    transform: scale(1.05);
+}
+
+
+
+
+
     .popup-box{
     position: fixed;
     top:50%;
@@ -48,6 +114,35 @@
         transform:translate(-50%,-50%);
     }
 }
+
+
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+}
+
+.marquee span {
+    display: inline-block;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 0;
+    animation: marqueeMove 6s linear infinite;
+}
+
+@keyframes marqueeMove {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
 </style>
 <body>
 
@@ -68,85 +163,133 @@
     }
 </script>
 
-<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
-background-color:black; font-weight:bold; margin-top:1%">
-    User SignUp
-</marquee>
+<div class="marquee">
+    <span>User SignUp</span>
+</div>
 
 <hr>
 
-<form class="container mt-5"
-      name="signup"
-      method="post"
-      enctype="multipart/form-data"
-      onsubmit="return checkpass();">
+<div class="signup-container">
+    <div class="signup-box">
 
-    {% csrf_token %}
+        <h2 style="text-align:center; margin-bottom:20px;">Create Account</h2>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label><b>First Name</b></label>
-            <input type="text" class="form-control" name="fname"
-                   placeholder="Enter First Name" required>
-        </div>
+        <form name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();">
+            {% csrf_token %}
 
-        <div class="form-group col-md-6">
-            <label><b>Last Name</b></label>
-            <input type="text" class="form-control" name="lname"
-                   placeholder="Enter Last Name" required>
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                </div>
+            </div>
+
+            <input type="text" class="form-control" name="contact" placeholder="Contact Number" required>
+            <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="password" class="form-control" id="cpwd" name="cpwd" placeholder="Confirm Password" required>
+                </div>
+            </div>
+
+            <div class="form-row" style="margin-bottom:10px;">
+                <div class="form-group col-md-6">
+                    <label>Gender:</label><br>
+                    <input type="radio" name="gender" value="male" required> Male
+                    <input type="radio" name="gender" value="female"> Female
+                </div>
+
+                <div class="form-group col-md-6">
+                    <input type="file" class="form-control" name="image" required>
+                </div>
+            </div>
+
+            <input type="submit" value="Sign Up" class="btn btn-success">
+        </form>
+
     </div>
+</div>
 
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label><b>Contact Number</b></label>
-            <input type="text" class="form-control" name="contact"
-                   placeholder="Enter Contact Number" required>
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label><b>Email Address</b></label>
-            <input type="email" class="form-control" name="email"
-                   placeholder="Enter Email Address" required>
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label><b>Password</b></label>
-            <input type="password" class="form-control"
-                   id="pwd" name="pwd"
-                   placeholder="Enter Password" required>
-        </div>
+<!--<form class="container mt-5"-->
+<!--      name="signup"-->
+<!--      method="post"-->
+<!--      enctype="multipart/form-data"-->
+<!--      onsubmit="return checkpass();">-->
 
-        <div class="form-group col-md-6">
-            <label><b>Confirm Password</b></label>
-            <input type="password" class="form-control"
-                   id="cpwd" name="cpwd"
-                   placeholder="Enter Confirm Password" required>
-        </div>
-    </div>
+<!--    {% csrf_token %}-->
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label><b>Gender</b></label><br>
-            <input type="radio" name="gender" value="male" required> Male
-            <input type="radio" name="gender" value="female"> Female
-        </div>
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>First Name</b></label>-->
+<!--            <input type="text" class="form-control" name="fname"-->
+<!--                   placeholder="Enter First Name" required>-->
+<!--        </div>-->
 
-        <div class="form-group col-md-6">
-            <label><b>Image</b></label>
-            <input type="file" class="form-control" name="image" required>
-        </div>
-    </div>
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>Last Name</b></label>-->
+<!--            <input type="text" class="form-control" name="lname"-->
+<!--                   placeholder="Enter Last Name" required>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <input type="submit"
-           value="Submit"
-           class="btn btn-primary"
-           style="height:40px; font-size:20px; width:200px;">
-</form>
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-12">-->
+<!--            <label><b>Contact Number</b></label>-->
+<!--            <input type="text" class="form-control" name="contact"-->
+<!--                   placeholder="Enter Contact Number" required>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-12">-->
+<!--            <label><b>Email Address</b></label>-->
+<!--            <input type="email" class="form-control" name="email"-->
+<!--                   placeholder="Enter Email Address" required>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>Password</b></label>-->
+<!--            <input type="password" class="form-control"-->
+<!--                   id="pwd" name="pwd"-->
+<!--                   placeholder="Enter Password" required>-->
+<!--        </div>-->
+
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>Confirm Password</b></label>-->
+<!--            <input type="password" class="form-control"-->
+<!--                   id="cpwd" name="cpwd"-->
+<!--                   placeholder="Enter Confirm Password" required>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>Gender</b></label><br>-->
+<!--            <input type="radio" name="gender" value="male" required> Male-->
+<!--            <input type="radio" name="gender" value="female"> Female-->
+<!--        </div>-->
+
+<!--        <div class="form-group col-md-6">-->
+<!--            <label><b>Image</b></label>-->
+<!--            <input type="file" class="form-control" name="image" required>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <input type="submit"-->
+<!--           value="Submit"-->
+<!--           class="btn btn-primary"-->
+<!--           style="height:40px; font-size:20px; width:200px;">-->
+<!--</form>-->
 
 <br><br>
 

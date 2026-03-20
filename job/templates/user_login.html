@@ -8,6 +8,76 @@
 </head>
 
 <style>
+
+    /* Background feel */
+body{
+    background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+}
+
+/* Login Card */
+.user-login-box{
+    width: 420px;
+    margin: 50px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: fadeUp 0.6s ease;
+}
+
+/* Animation */
+@keyframes fadeUp{
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Inputs */
+.user-login-box .form-control{
+    margin-bottom: 15px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Login Button (green 🌿) */
+.user-login-btn{
+    background-color: #14532d;
+    border: none;
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 8px;
+    color: white;
+    transition: 0.3s;
+}
+
+.user-login-btn:hover{
+    background-color: #0f3d21;
+    transform: scale(1.05);
+}
+
+/* Signup link style */
+.user-signup-link{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #14532d;
+    text-decoration: none;
+}
+
+.user-signup-link:hover{
+    text-decoration: underline;
+}
+
+
+
+
     .popup-box{
     position: fixed;
     top:50%;
@@ -137,18 +207,42 @@
     </div>
 </div>
 
-    <form class="container mt-5" method="post">
+<!--    <form class="container mt-5" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <label><b>Email Address</b></label>-->
+<!--        <input type="email" class="form-control" name="uname" placeholder="Enter your emailid">-->
+<!--        <label><b>Password</b></label>-->
+<!--        <input type="password" class="form-control" name="pwd" placeholder="Enter Password">-->
+
+<!--        <input type="submit" value="Login" class="btn btn-primary" style="margin-top:2%;  height:40px; font-size:20px; width:200px;" >-->
+
+<!--        <a href="{% url 'user_signup' %}" class="btn btn-success" style="margin-top:2%;  height:40px; font-size:20px; width:300px;" >CREATE AN ACCOUNT</a>-->
+<!--    </form>-->
+
+
+
+    <div class="user-login-box">
+
+    <h3 style="text-align:center; margin-bottom:20px;">User Login</h3>
+
+    <form method="post">
         {% csrf_token %}
+
         <label><b>Email Address</b></label>
-        <input type="email" class="form-control" name="uname" placeholder="Enter your emailid">
+        <input type="email" class="form-control" name="uname" placeholder="Enter your email" required>
+
         <label><b>Password</b></label>
-        <input type="password" class="form-control" name="pwd" placeholder="Enter Password">
+        <input type="password" class="form-control" name="pwd" placeholder="Enter Password" required>
 
-        <input type="submit" value="Login" class="btn btn-primary" style="margin-top:2%;  height:40px; font-size:20px; width:200px;" >
+        <input type="submit" value="Login" class="user-login-btn">
 
-        <a href="{% url 'user_signup' %}" class="btn btn-success" style="margin-top:2%;  height:40px; font-size:20px; width:300px;" >CREATE AN ACCOUNT</a>
+        <a href="{% url 'user_signup' %}" class="user-signup-link">
+            Don't have an account? Sign Up
+        </a>
+
     </form>
 
+</div>
 <br><br>
 
      {%block content %}

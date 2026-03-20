@@ -11,10 +11,9 @@
 
     {% include 'admin_navigation.html' %}
 
-<marquee style="font-family:'Monotype Corsiva'; font-size:25px; color:darkcyan;
-background-color:black; font-weight:bold; margin-top:1%">
-    Admin Home
-</marquee>
+<div class="marquee">
+  <span>Admin Home</span>
+</div>
 
 <hr>
 
@@ -78,7 +77,9 @@ background-color:black; font-weight:bold; margin-top:1%">
 </div>
      {%block content %}
 
+    <br>
 
+ {% include 'footer.html' %}
 
     <script>
 var ctx = document.getElementById('dashboardChart').getContext('2d');
@@ -235,5 +236,35 @@ setTimeout(function(){
 .chart-box:hover{
     transform: translateY(-6px);
     box-shadow:0 10px 35px rgba(0,0,0,0.22);
+}
+
+     .marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 1%;
+    position: relative;
+    height: 40px;
+}
+
+.marquee span {
+    position: absolute;
+    white-space: nowrap;
+    color: darkcyan;
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    animation: moveText 15s linear infinite;
+}
+
+/* Right → Left movement */
+@keyframes moveText {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
 }
 </style>
