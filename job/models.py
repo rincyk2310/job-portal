@@ -21,6 +21,7 @@ class Recruiter(models.Model):
     company = models.CharField(max_length=100, null=True)
     type=models.CharField(max_length=15,null=True)
     status = models.CharField(max_length=20 ,null=True)
+    reject_reason = models.TextField(null=True, blank=True)
 
     def _str_(self):
         return self.user.username

@@ -7,15 +7,35 @@ from .models import Job, Recruiter ,Contact
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
-
+from django.db.models import Count
 
 # Create your views here.
 
+
 def index(request):
+    # Jobs and filters
     jobs = Job.objects.all()
     titles = Job.objects.values_list('title', flat=True).distinct()
     locations = Job.objects.values_list('location', flat=True).distinct()
-    return render(request,'index.html',{'jobs':jobs,'locations':locations,'titles':titles})
+
+    # Dashboard stats
+    jobcount = Job.objects.count()
+    candidatecount = studentUser.objects.count()
+    # Count distinct companies
+    companycount = Recruiter.objects.values('company').distinct().count()
+    recruitercount = Recruiter.objects.count()
+
+    context = {
+        'jobs': jobs,
+        'titles': titles,
+        'locations': locations,
+        'jobcount': jobcount,
+        'candidatecount': candidatecount,
+        'companycount': companycount,
+        'recruitercount': recruitercount
+    }
+
+    return render(request, 'index.html', context)
 
 
 def admin_login(request):
@@ -280,22 +300,32 @@ def recruiter_pending(request):
     d={'data':data}
     return render(request,'recruiter_pending.html',d)
 
-def change_status(request,pid):
+
+
+
+def change_status(request, pid):
     if not request.user.is_authenticated:
         return redirect('admin_login')
-    error=""
-    recruiter=Recruiter.objects.get(id=pid)
+
+    error = ""
+    recruiter = Recruiter.objects.get(id=pid)
+
     if request.method == "POST":
-        s=request.POST['status']
-        recruiter.status=s
+        s = request.POST['status']
+        recruiter.status = s
+
+        # Save reason only if rejected
+        if s == "Reject":
+            recruiter.reject_reason = request.POST.get('reject_reason', '')
+
         try:
             recruiter.save()
-            error="no"
+            error = "no"
         except:
-            error="yes"
+            error = "yes"
 
-    recruiter={'recruiter':recruiter,'error':error}
-    return render(request,'change_status.html',recruiter)
+    context = {'recruiter': recruiter, 'error': error}
+    return render(request, 'change_status.html', context)
 
 def recruiter_accepted(request):
     if not request.user.is_authenticated:
@@ -502,7 +532,7 @@ def user_latestjob(request):
     status_dict = {}
 
     for a in applications:
-        if a.job is not None:   # ✅ Prevent NoneType error
+        if a.job is not None:
             status_dict[a.job.id] = a.status
 
     #  Saved jobs
@@ -581,7 +611,7 @@ def applyjob(request, pid):
 
                             settings.EMAIL_HOST_USER,
 
-                            [student.user.email, 'projectdemo347@gmail.com'],  #  Add demo mail
+                            [student.user.email, 'projectdemo347@gmail.com'],
 
                             fail_silently=False,
                         )

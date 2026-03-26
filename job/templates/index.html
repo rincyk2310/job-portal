@@ -57,138 +57,107 @@
 </div>
 
 
- <!-- Statistics Section -->
+
 <!-- Job Statistics Section -->
-<div class="stats-section">
-<div class="container text-center">
 
-<h2 class="stats-title">JobBoard Site Stats</h2>
+    <div class="stats-section mt-5 shadow-lg p-4">
+    <div class="container text-center">
 
-<p class="stats-subtitle">
-Build your career with thousands of opportunities.
-</p>
+        <h2 class="stats-title mb-4">JobBoard Stats</h2>
+        <p class="stats-subtitle mb-5">Build your career with thousands of opportunities.</p>
 
-<div class="row mt-5">
+        <div class="row text-center">
 
-<div class="col-md-3">
-<div class="stats-box">
-<h2>1930</h2>
-<p>Candidates</p>
-</div>
-</div>
-
-<div class="col-md-3">
-<div class="stats-box">
-<h2>54</h2>
-<p>Jobs Posted</p>
-</div>
-</div>
-
-<div class="col-md-3">
-<div class="stats-box">
-<h2>120</h2>
-<p>Jobs Filled</p>
-</div>
-</div>
-
-<div class="col-md-3">
-<div class="stats-box">
-<h2>550</h2>
-<p>Companies</p>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-
-<section class="cta-section">
-
-<div class="container">
-
-<div class="row align-items-center">
-
-<div class="col-md-8">
-
-<h2 class="cta-title">
-Looking For A Job?
-</h2>
-
-<p class="cta-text">
-Build your career with thousands of opportunities. Register now and start applying.
-</p>
-
-</div>
-
-<div class="col-md-3 ms-auto text-end">
-
-<a href="{% url 'user_signup' %}" class="btn cta-btn">
-Sign Up
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-
-<div class="placed-section">
-    <div class="container">
-
-        <h1 class="placed-title">
-            ———— | OUR PLACED STUDENTS | ————
-        </h1>
-
-        <div class="row justify-content-center">
-
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f.jpg' %}">
-                <div class="company-name">Amazon</div>
+            <!-- Jobs Posted -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ jobcount }}</h2>
+                    <p>Jobs Posted</p>
+                </div>
             </div>
 
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f7.jpg' %}">
-                <div class="company-name">Facebook</div>
+            <!-- Candidates -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ candidatecount }}</h2>
+                    <p>Candidates</p>
+                </div>
             </div>
 
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f1.jpg' %}">
-                <div class="company-name">Google</div>
+            <!-- Companies -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ companycount }}</h2>
+                    <p>Companies</p>
+                </div>
             </div>
 
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f3.png' %}">
-                <div class="company-name">Oracle</div>
-            </div>
-
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f5.png' %}">
-                <div class="company-name">Capgemini</div>
-            </div>
-
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f4.png' %}">
-                <div class="company-name">EY</div>
-            </div>
-
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f6.jpg' %}">
-                <div class="company-name">Infosys</div>
-            </div>
-
-            <div class="col-md-3 student-card">
-                <img src="{% static 'images/f2.jpg' %}">
-                <div class="company-name">TCS</div>
+            <!-- Recruiters -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ recruitercount }}</h2>
+                    <p>Recruiters</p>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
+
+
+<section class="cta-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-md-8">
+                <h2 class="cta-title">Looking For A Job?</h2>
+                <p class="cta-text">
+                    Build your career with thousands of opportunities. Register now or browse jobs and start applying today.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <a href="{% url 'user_signup' %}" class="btn cta-btn me-2">Sign Up</a>
+                <a href="{% url 'latest_jobs' %}" class="btn cta-btn-secondary">Browse Jobs</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--<section class="cta-section">-->
+
+<!--    <div class="container">-->
+
+<!--        <div class="row align-items-center">-->
+
+<!--            <div class="col-md-8">-->
+
+<!--                <h2 class="cta-title">-->
+<!--                Looking For A Job?-->
+<!--                </h2>-->
+
+<!--                <p class="cta-text">-->
+<!--                Build your career with thousands of opportunities. Register now and start applying.-->
+<!--                </p>-->
+
+<!--            </div>-->
+
+<!--            <div class="col-md-3 ms-auto text-end">-->
+
+<!--                <a href="{% url 'user_signup' %}" class="btn cta-btn">-->
+<!--                Sign Up-->
+<!--                </a>-->
+
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--    </div>-->
+
+<!--</section>-->
+
+
 
     {% include 'footer.html' %}
 
@@ -197,8 +166,6 @@ Sign Up
 </html>
 
 <style>
-
-
 
 
 .navbar{
@@ -414,5 +381,52 @@ Sign Up
 
 .cta-btn:hover{
     transform:scale(1.05);
+}
+
+
+
+
+
+    .cta-section {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    background-size: 200% 200%;
+    animation: gradientMove 10s ease infinite;
+    padding: 60px 0;
+    border-radius: 20px;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.cta-btn {
+    background: #ffc107;
+    padding: 14px 35px;
+    font-size: 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.cta-btn-secondary {
+    background: #0d6efd;
+    color: #fff;
+    padding: 14px 35px;
+    font-size: 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-btn-secondary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 </style>

@@ -85,7 +85,7 @@
 var ctx = document.getElementById('dashboardChart').getContext('2d');
 
 var dashboardChart = new Chart(ctx, {
-    type: 'pie',   /* Change to bar, line, doughnut if needed */
+    type: 'pie',
 
     data: {
         labels: ['Pending Recruiters', 'Accepted Recruiters', 'Rejected Recruiters'],
@@ -117,6 +117,7 @@ var dashboardChart = new Chart(ctx, {
     }
 });
 </script>
+
     {% if error == "no" %}
 <div class="custom-alert">
 ✅ Login successful
@@ -140,10 +141,6 @@ setTimeout(function(){
 
 </body>
 </html>
-
-
-
-
 
 
 

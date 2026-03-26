@@ -24,19 +24,15 @@
 
 <div class="job-card">
 
-<div class="job-title">
-🏢 {{ i.recruiter.company }} — {{ i.title }}
-</div>
+        <div class="job-title">
+        🏢 {{ i.recruiter.company }} — {{ i.title }}
+        </div>
 
-<p class="job-meta">📍 Location : {{ i.location }}</p>
-<p class="job-meta">📅 Start : {{ i.start_date }}</p>
-<p class="job-meta">📅 End : {{ i.end_date }}</p>
+            <p class="job-meta">📍 Location : {{ i.location }}</p>
+            <p class="job-meta">📅 Start : {{ i.start_date }}</p>
+            <p class="job-meta">📅 End : {{ i.end_date }}</p>
 
-<!--{% if i.id in li %}-->
-<!--<span class="text-success">✔ Applied</span>-->
-<!--{% else %}-->
-<!--<a href="{% url 'job_detail' i.id %}" class="apply-btn">Apply Now</a>-->
-<!--{% endif %}-->
+
 
 
     {% if i.id in status_dict %}
