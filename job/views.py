@@ -11,17 +11,13 @@ from django.db.models import Count
 
 # Create your views here.
 
-
 def index(request):
-    # Jobs and filters
     jobs = Job.objects.all()
     titles = Job.objects.values_list('title', flat=True).distinct()
     locations = Job.objects.values_list('location', flat=True).distinct()
 
-    # Dashboard stats
     jobcount = Job.objects.count()
     candidatecount = studentUser.objects.count()
-    # Count distinct companies
     companycount = Recruiter.objects.values('company').distinct().count()
     recruitercount = Recruiter.objects.count()
 
@@ -54,6 +50,8 @@ def admin_login(request):
             error="yes"
     d={'error':error}
     return render(request,'admin_login.html',d)
+
+
 
 def admin_home(request):
     if not request.user.is_authenticated:
@@ -144,30 +142,28 @@ def recruiter_signup(request):
 
 
 def user_home(request):
-    #  login check
+
     if not request.user.is_authenticated:
         return redirect('user_login')
 
     user = request.user
-
-    #  auto-create student profile if not exists
     student, created = studentUser.objects.get_or_create(user=user)
 
     error = None
 
     if request.method == "POST":
-        # form values
+
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         contact = request.POST.get('mobile')
         gender = request.POST.get('gender')
 
-        # update Django User table
+
         user.first_name = fname
         user.last_name = lname
         user.save()
 
-        # update studentUser table
+
         student.mobile = contact
         student.gender = gender
         student.save()
@@ -195,14 +191,14 @@ def user_home(request):
 
 
 def recruiter_home(request):
-    #  login check
+
     if not request.user.is_authenticated:
         return redirect('recruiter_login')
 
     user = request.user
     recruiter = Recruiter.objects.filter(user=user).first()
 
-    #  recruiter profile not created yet
+
     if not recruiter:
         return redirect('recruiter_profile')  # or recruiter_signup
 
@@ -214,16 +210,15 @@ def recruiter_home(request):
         contact = request.POST.get('contact')
         gender = request.POST.get('gender')
 
-        # update user
+
         user.first_name = fname
         user.last_name = lname
         user.save()
 
-        # update recruiter
+
         recruiter.mobile = contact
         recruiter.gender = gender
 
-        # image upload (optional)
         if 'image' in request.FILES:
             recruiter.image = request.FILES['image']
 
@@ -272,11 +267,11 @@ def user_signup(request):
 
 
 def view_users(request):
-    # Admin authentication check
+
     if not request.user.is_authenticated:
         return redirect('admin_login')
 
-    # Fetch all student users
+
     data = studentUser.objects.all()
 
     context = {
@@ -314,7 +309,7 @@ def change_status(request, pid):
         s = request.POST['status']
         recruiter.status = s
 
-        # Save reason only if rejected
+
         if s == "Reject":
             recruiter.reject_reason = request.POST.get('reject_reason', '')
 
@@ -332,12 +327,16 @@ def recruiter_accepted(request):
         return redirect('admin_login')
     data = Recruiter.objects.filter(status='Accept')
     return render(request, 'recruiter_accepted.html', {'data': data})
+
+
 def recruiter_rejected(request):
     if not request.user.is_authenticated:
         return redirect('admin_login')
     data=Recruiter.objects.filter(status="Reject")
     d={'data':data}
     return render(request,'recruiter_rejected.html',d)
+
+
 def recruiter_all(request):
     if not request.user.is_authenticated:
         return redirect('admin_login')
@@ -526,7 +525,6 @@ def user_latestjob(request):
 
     student = studentUser.objects.get(user=request.user)
 
-    #  Applied jobs safely
     applications = Apply.objects.filter(student=student)
 
     status_dict = {}
@@ -569,11 +567,11 @@ def applyjob(request, pid):
 
         today = date.today()
 
-        #  Already applied check
+
         if Apply.objects.filter(student=student, job=job).exists():
             error = "already"
 
-        #  Job date validation
+
         elif job.end_date < today:
             error = "close"
 
@@ -598,51 +596,12 @@ def applyjob(request, pid):
                         resume=resume,
                         apply_date=date.today()
                     )
-
-                    #  Email Notification
-                    if request.user.email:
-                        send_mail(
-                            'Job Application Confirmation',
-                            f'''Hi {student.user.username},
-
-                        You have successfully applied for {job.title} job.
-
-                        Thank you for using our Job Portal.''',
-
-                            settings.EMAIL_HOST_USER,
-
-                            [student.user.email, 'projectdemo347@gmail.com'],
-
-                            fail_silently=False,
-                        )
-
                     error = "done"
 
     except Exception as e:
         print("Error:", e)
 
     return render(request, 'applyjob.html', {'error': error})
-
-
-def mail_sent(request):
-
-    send_mail(
-        'Job Application Confirmation',
-
-        '''Hi User,
-
-You have successfully applied for the job.
-
-Thank you for using our Job Portal.''',
-
-        settings.EMAIL_HOST_USER,
-
-        ['projectdemo347@gmail.com'],
-
-        fail_silently=False,
-    )
-
-    return HttpResponse("Mail sent check inbox")
 
 
 
@@ -712,7 +671,19 @@ def search_jobs(request):
 
 
 def about(request):
-    return render(request,'about.html')
+    jobcount = Job.objects.count()
+    candidatecount = studentUser.objects.count()
+    companycount = Recruiter.objects.values('company').distinct().count()
+    recruitercount = Recruiter.objects.count()
+
+    context = {
+        'jobcount': jobcount,
+        'candidatecount': candidatecount,
+        'companycount': companycount,
+        'recruitercount': recruitercount
+    }
+
+    return render(request,'about.html',context)
 
 def services(request):
     return render(request,'services.html')
@@ -752,3 +723,44 @@ def delete_job(request, pid):
     job.delete()
 
     return redirect('job_list')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,16 +7,11 @@
     <list default="true" id="e6eaacaa-75be-4439-821b-7915d2790d8e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/admin_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/admin_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/admin_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/admin_login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/applied_candidates.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/applied_candidates.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/applyjob.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/applyjob.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/change_status.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/change_status.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/templates/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/contact.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/job/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/services.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/services.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/job/templates/user_latestjob.html" beforeDir="false" afterPath="$PROJECT_DIR$/job/templates/user_latestjob.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/job/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobportal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobportal/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

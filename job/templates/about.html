@@ -31,44 +31,53 @@
 
 
 
-<section class="stats-section">
+<!-- Job Statistics Section -->
+
+    <div class="stats-section mt-5 shadow-lg p-4">
     <div class="container text-center">
 
-        <h2>Job Portal Statistics</h2>
-        <p>Build your career with thousands of opportunities</p>
+        <h2 class="stats-title mb-4">JobBoard Stats</h2>
+        <p class="stats-subtitle mb-5">Build your career with thousands of opportunities.</p>
 
-<div class="row mt-5">
-    <div class="col-md-3 col-6">
-        <div class="stat-box">
-            <h2>1930+</h2>
-            <p>Candidates</p>
+        <div class="row text-center">
+
+            <!-- Jobs Posted -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ jobcount }}</h2>
+                    <p>Jobs Posted</p>
+                </div>
+            </div>
+
+            <!-- Candidates -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ candidatecount }}</h2>
+                    <p>Candidates</p>
+                </div>
+            </div>
+
+            <!-- Companies -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ companycount }}</h2>
+                    <p>Companies</p>
+                </div>
+            </div>
+
+            <!-- Recruiters -->
+            <div class="col-md-3 mb-3">
+                <div class="stats-box p-3 border rounded shadow-sm">
+                    <h2>{{ recruitercount }}</h2>
+                    <p>Recruiters</p>
+                </div>
+            </div>
+
         </div>
-    </div>
-
-    <div class="col-md-3 col-6">
-        <div class="stat-box">
-            <h2>54+</h2>
-            <p>Jobs Posted</p>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-6">
-        <div class="stat-box">
-            <h2>120+</h2>
-            <p>Jobs Filled</p>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-6">
-        <div class="stat-box">
-            <h2>550+</h2>
-            <p>Companies</p>
-        </div>
-    </div>
-
     </div>
 </div>
-</section>
+
+
 
 <section class="about-section">
     <div class="container">
